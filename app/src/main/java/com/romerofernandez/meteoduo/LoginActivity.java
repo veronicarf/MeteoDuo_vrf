@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                         return;
                     }
 
-                  
+
                     cargarRolYRedirigir(user.getUid());
                 })
                 .addOnFailureListener(e ->

@@ -28,5 +28,22 @@
     <string name="register_ok">Cuenta creada correctamente</string>
     <string name="error_password_repeat">Las contraseñas no coinciden</string>
 
+    <!-- *****  activity- usuario/ admisnitrador  ***** -->
+    
+    <string name="consulta_button">CONSULTAR PREDICCIÓN</string>
+    <string name="historial_button">MI HISTORIAL</string>
+    <string name="closed_sesion">Cerrar sesión</string>
+    <string name="setting">Ajustes</string>;
+    <string name="avatar">Avatar</string>
+    <string name="nombre_usuario">Nombre</string>
+    <string name="frase">“El tiempo cambia, tú decides cómo afrontarlo.”</string>
+    <string name="admisnitrador">Cuenta de admisnitrador</string>
+    <string name="bton_admisnitrador">CONSULTAR APP</string>
+
+
+
+
+
+
 
 </resources>

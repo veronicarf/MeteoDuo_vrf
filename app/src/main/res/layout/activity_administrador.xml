@@ -1,14 +1,163 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- ===================== -->
+    <!-- SECCIÓN: Fondo        -->
+    <!-- ===================== -->
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.8"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/textura"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+
+
+    <!-- ============================== -->
+    <!-- CUENTA ADMINISTRADOR -->
+    <!-- ============================== -->
+
     <TextView
         android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="648dp"
+        android:gravity="center"
+        android:text="@string/admisnitrador"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btnMenu" />
+
+    <!-- ============================== -->
+    <!-- SECCIÓN: Menú (arriba izquierda) -->
+    <!-- ============================== -->
+    <ImageButton
+        android:id="@+id/btnMenu"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/setting"
+        android:scaleType="centerInside"
+        android:src="@drawable/cielo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ===================== -->
+    <!-- SECCIÓN: Perfil       -->
+    <!-- (Avatar + Nombre)     -->
+    <!-- ===================== -->
+    <ImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="100dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="116dp"
+        android:background="@drawable/bg_circle"
+        android:clipToOutline="true"
+        android:contentDescription="@string/avatar"
+        android:scaleType="centerCrop"
+        android:src="@drawable/avatar_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pagina admisnitrador"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="333dp" />
+        android:layout_marginTop="8dp"
+        android:text="@string/nombre_usuario"
+        android:textColor="@color/boton"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/imgAvatar"
+        app:layout_constraintStart_toStartOf="@id/imgAvatar"
+        app:layout_constraintEnd_toEndOf="@id/imgAvatar"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <!-- ===================== -->
+    <!-- SECCIÓN: Acciones     -->
+    <!-- (Botones principales) -->
+    <!-- ===================== -->
+    <Button
+        android:id="@+id/btnConsultar"
+        android:layout_width="297dp"
+        android:layout_height="84dp"
+        android:backgroundTint="@color/boton"
+        android:text="@string/consulta_button"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.514" />
+
+    <Button
+        android:id="@+id/btnHistorial"
+        android:layout_width="250dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="@color/boton"
+        android:text="@string/historial_button"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/btnConsultar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnApp"
+        android:layout_width="250dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="108dp"
+        android:backgroundTint="@color/boton"
+        android:text="@string/bton_admisnitrador"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnConsultar" />
+
+    <!-- ===================== -->
+    <!-- Frase -->
+    <!-- ===================== -->
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="96dp"
+        android:gravity="center"
+        android:text="@string/frase"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
