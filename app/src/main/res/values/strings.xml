@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">MeteoDuo</string>
+
+    <!-- *****  Login_activity  ***** -->
+    <!-- Login -->
+    <string name="login_title">MeteoDuo</string>
+    <string name="email_hint">Correo electrónico</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button">Entrar</string>
+    <string name="go_to_register">No tengo cuenta. Registrarme</string>
+
+    <!-- Errores -->
+    <string name="error_email">Introduce un correo válido</string>
+    <string name="error_password">Contraseña mínima 6 caracteres</string>
+    <string name="error_login">Correo electrónico o contraseña incorrectos</string>
+
+
+    <!-- Mensajes -->
+    <string name="login_ok">Inicio de sesión correcto</string>
+
+    <!-- *****  register_activity  ***** -->
+
+
+    <string name="register_button">Crear cuenta</string>
+    <string name="go_to_login">Ya tengo cuenta. Iniciar sesión</string>
+    <string name="repeat_password">Repetir contraseña</string>
+
+    <string name="register_ok">Cuenta creada correctamente</string>
+    <string name="error_password_repeat">Las contraseñas no coinciden</string>
+
+
+</resources>

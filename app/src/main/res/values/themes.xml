@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MeteoDuo" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Tipo letras login_activity-->
+
+
+    </style>
+
+    <style name="Theme.MeteoDuo" parent="Base.Theme.MeteoDuo" />
+    
+    
+
+
+</resources>

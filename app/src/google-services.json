@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "596556920366",
+    "project_id": "meteoduo",
+    "storage_bucket": "meteoduo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596556920366:android:fa7d8c6811e5a74e3911bf",
+        "android_client_info": {
+          "package_name": "com.romerofernandez.meteoduo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWcB9AqZWMJReXpT_nKMamWpuaqlsqtlc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
