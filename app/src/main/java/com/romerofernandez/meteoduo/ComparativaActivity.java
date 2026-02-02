@@ -3,7 +3,7 @@ package com.romerofernandez.meteoduo;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +18,10 @@ public class ComparativaActivity extends AppCompatActivity {
 
         private FirebaseFirestore db;
 
-        private Spinner spProvA, spMunA, spProvB, spMunB;
+    private AutoCompleteTextView spProvA, spMunA, spProvB, spMunB;
 
-        private final List<String> provinciaIds = new ArrayList<>();
+
+    private final List<String> provinciaIds = new ArrayList<>();
         private final List<String> provinciaNombres = new ArrayList<>();
 
         private ArrayAdapter<String> adapterProvA;
@@ -33,11 +34,10 @@ public class ComparativaActivity extends AppCompatActivity {
 
             db = FirebaseFirestore.getInstance();
 
-            // 🔁 CAMBIA los ids si en tu XML se llaman diferente
-            spProvA = findViewById(R.id.spProvinciaa);
-            spMunA  = findViewById(R.id.spMunicipioa);
-            spProvB = findViewById(R.id.spProvinciab);
-            spMunB  = findViewById(R.id.spMunicipiob);
+            spProvA = findViewById(R.id.autoCompleteTextView);
+            spMunA  = findViewById(R.id.autoCompleteTextView2);
+            spProvB = findViewById(R.id.autoCompleteTextView3);
+            spMunB  = findViewById(R.id.autoCompleteTextView4);
 
             adapterProvA = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, provinciaNombres);
             adapterProvA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

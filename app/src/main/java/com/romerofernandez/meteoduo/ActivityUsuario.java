@@ -22,7 +22,7 @@ public class ActivityUsuario  extends AppCompatActivity {
 
         // Accedemos a comparativa
 
-        Button btnConsultar = findViewById(R.id.btnHistorial);
+        Button btnConsultar = findViewById(R.id.btnConsultar);
         btnConsultar.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityUsuario.this, ComparativaActivity.class);
             startActivity(intent);

@@ -48,6 +48,8 @@
     <string name="punto_b">PUNTO B</string>
     <string name="provincia">Provincia</string>
     <string name="municipio">Municipio </string>
+    <string name="autocomplete">Escriba la provincia</string>
+    <string name="autocompletem">Escriba el municipio</string>
 
 
 </resources>
