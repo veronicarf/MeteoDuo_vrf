@@ -38,15 +38,22 @@ public class ActivityAdministrador  extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Accedemos a ajustes
+        // Accedemos a comparativa
 
         btnConsultar.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityAdministrador.this, ComparativaActivity.class);
             startActivity(intent);
         });
 
+        // Accedemos al historial
 
-        btnConsultar.setOnClickListener(v -> {
+        btnHistorial.setOnClickListener(v -> {
+            Intent intent = new Intent(ActivityAdministrador.this, HistorialActivity.class);
+            startActivity(intent);
+        });
+        // Accedemos al apartado del admisnitrador
+
+        btnApp.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityAdministrador.this, AppActivity.class);
             startActivity(intent);
         });

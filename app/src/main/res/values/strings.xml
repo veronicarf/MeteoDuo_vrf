@@ -29,7 +29,7 @@
     <string name="error_password_repeat">Las contraseñas no coinciden</string>
 
     <!-- *****  activity- usuario/ admisnitrador  ***** -->
-    
+
     <string name="consulta_button">CONSULTAR PREDICCIÓN</string>
     <string name="historial_button">MI HISTORIAL</string>
     <string name="closed_sesion">Cerrar sesión</string>
@@ -41,9 +41,13 @@
     <string name="bton_admisnitrador">CONSULTAR APP</string>
 
 
+    <!-- *****  activity- busqueda  ***** -->
 
-
-
+    <string name="tu_destino">ELIGE TU DESTINO</string>
+    <string name="punto_a">PUNTO A</string>
+    <string name="punto_b">PUNTO B</string>
+    <string name="provincia">Provincia</string>
+    <string name="municipio">Municipio </string>
 
 
 </resources>

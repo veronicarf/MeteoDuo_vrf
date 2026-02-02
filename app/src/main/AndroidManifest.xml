@@ -13,14 +13,15 @@
         android:theme="@style/Theme.MeteoDuo"
         tools:targetApi="31">
         <activity
-            android:name=".AcivityUsuario"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityAdministrador"
+            android:name=".ComparativaActivity"
             android:exported="false" />
         <activity
             android:name=".ActivityUsuario"
             android:exported="false" />
+        <activity
+            android:name=".ActivityAdministrador"
+            android:exported="false" />
+
         <activity
             android:name=".RegisterActivity"
             android:exported="false" /> <!-- PANTALLA INICIAL -->

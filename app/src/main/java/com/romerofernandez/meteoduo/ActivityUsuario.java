@@ -15,13 +15,20 @@ public class ActivityUsuario  extends AppCompatActivity {
         // Accedemos a ajustes
         ImageButton btnMenu = findViewById(R.id.btnMenu);
 
-        // Accedemos a ajustes
         btnMenu.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityUsuario.this, AjustesActivity.class);
             startActivity(intent);
         });
 
-        // Accedemos a ajustes
+        // Accedemos a comparativa
+
+        Button btnConsultar = findViewById(R.id.btnHistorial);
+        btnConsultar.setOnClickListener(v -> {
+            Intent intent = new Intent(ActivityUsuario.this, ComparativaActivity.class);
+            startActivity(intent);
+        });
+
+        // Accedemos a historial
         Button btnHistorial = findViewById(R.id.btnHistorial);
 
         btnHistorial.setOnClickListener(v -> {
