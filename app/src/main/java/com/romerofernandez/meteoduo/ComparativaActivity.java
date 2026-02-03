@@ -1,81 +1,143 @@
 package com.romerofernandez.meteoduo;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Activity encargada de la comparación de localizaciones.
+ *
+ * En esta pantalla se permite seleccionar dos puntos distintos (A y B),
+ * eligiendo una provincia y posteriormente un municipio mediante campos
+ * de autocompletado. Los datos se obtienen desde la API GeoAPI utilizando
+ * peticiones HTTP gestionadas con la librería Volley.
+ */
 public class ComparativaActivity extends AppCompatActivity {
 
-    // UI
+    // -----------------------------
+    // 1) COMPONENTES DE INTERFAZ
+    // -----------------------------
+
+    /**
+     * Campos de autocompletado para provincias y municipios.
+     * Se utilizan dos  campos, uno para el punto A y otro para el punto B.
+     */
     private AutoCompleteTextView spProvA, spMunA, spProvB, spMunB;
 
-    // Volley
+    // -----------------------------
+    // 2) RED (VOLLEY)
+    // -----------------------------
+
+    /**
+     * Cola de peticiones de red utilizada por Volley.
+     * En ella se encolan todas las peticiones HTTP que realiza la aplicación.
+     */
     private RequestQueue queue;
 
-    // Provincias
+    // -----------------------------
+    // 3) DATOS DE PROVINCIAS
+    // -----------------------------
+
+    /**
+     * Lista con los nombres de las provincias obtenidas de la API.
+     * Se utiliza como fuente de datos para el autocompletado.
+     */
     private final List<String> provinciaNombres = new ArrayList<>();
+
+    /**
+     * Mapa que relaciona el nombre de una provincia con su código (CPRO).
+     */
     private final Map<String, String> provinciaNombreToCpro = new HashMap<>();
 
-    // Municipios A / B
+    // -----------------------------
+    // 4) DATOS DE MUNICIPIOS
+    // -----------------------------
+
+    /**
+     * Listas de municipios correspondientes a cada punto de comparación.
+     */
     private final List<String> municipiosA = new ArrayList<>();
     private final List<String> municipiosB = new ArrayList<>();
 
-    // Adapters
+    // -----------------------------
+    // 5) ADAPTERS
+    // -----------------------------
+
+    /**
+     * Adapters utilizados por los AutoCompleteTextView
+     * para mostrar provincias y municipios.
+     */
     private ArrayAdapter<String> adapterProv;
     private ArrayAdapter<String> adapterMunA;
     private ArrayAdapter<String> adapterMunB;
 
-    // GeoAPI
+    // -----------------------------
+    // 6) CONFIGURACIÓN GEOAPI
+    // -----------------------------
+
+    /**
+     * URL base de la API GeoAPI utilizada para realizar las peticiones.
+     */
     private static final String BASE = "https://apiv1.geoapi.es";
 
-    // ✅ PON AQUÍ TU KEY (para que funcione al clonar tu repo)
-    private static final String KEY = "1fc368b23d25818cdd878134ec20df90e9e67a7a38481c4e395d0a6d56f99abc";
+    /**
+     * Clave de autenticación necesaria para acceder a GeoAPI.
+     */
+    private static final String KEY ="1fc368b23d25818cdd878134ec20df90e9e67a7a38481c4e395d0a6d56f99abc";
 
-    // ✅ Params centralizados
-    private static final String COMMON_PARAMS = "FORMAT=json&PAGE_SIZE=1000&KEY=" + KEY;
+    /**
+     * Parámetros comunes a todas las peticiones:
+     */
+    private static final String COMMON_PARAMS ="FORMAT=json&PAGE_SIZE=1000&KEY=" + KEY;
 
-    // Para no recargar municipios todo el rato si escribe lo mismo
+    // -----------------------------
+    // 7) OTROS
+    // -----------------------------
+
+    /**
+     * Variables auxiliares utilizadas para evitar recargar municipios
+     * si el texto de la provincia no ha cambiado.
+     */
     private String ultimaProvA = "";
     private String ultimaProvB = "";
 
+    /**
+     * Método principal de inicialización de la Activity.
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comparativa);
 
+        // Inicialización de la cola de peticiones de Volley
         queue = Volley.newRequestQueue(this);
 
+        // Enlazado con los elementos definidos en el layout XML
         spProvA = findViewById(R.id.autoCompleteTextView);
         spMunA  = findViewById(R.id.autoCompleteTextView3);
-
         spProvB = findViewById(R.id.autoCompleteTextView2);
         spMunB  = findViewById(R.id.autoCompleteTextView4);
 
-        // Threshold: con 1 letra ya sugiere
+        // El autocompletado se activa a partir de una letra
         spProvA.setThreshold(1);
         spProvB.setThreshold(1);
         spMunA.setThreshold(1);
         spMunB.setThreshold(1);
 
-        // Adapter provincias (compartido)
+        // Adapter de provincias compartido por los campos A y B
         adapterProv = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -84,7 +146,7 @@ public class ComparativaActivity extends AppCompatActivity {
         spProvA.setAdapter(adapterProv);
         spProvB.setAdapter(adapterProv);
 
-        // Adapters municipios
+        // Adapters independientes para los municipios de cada punto
         adapterMunA = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -99,17 +161,17 @@ public class ComparativaActivity extends AppCompatActivity {
         );
         spMunB.setAdapter(adapterMunB);
 
-        // Mostrar sugerencias automáticamente (y al tocar)
+        // Configuración del autocompletado
         autoShowDropdown(spProvA);
         autoShowDropdown(spProvB);
         autoShowDropdown(spMunA);
         autoShowDropdown(spMunB);
 
-        // Si el usuario escribe y NO pulsa sugerencia, igual cargamos municipios
+        // Vincula provincias con municipios aunque no se pulse una sugerencia
         vincularProvinciaConMunicipios(spProvA, spMunA, true);
         vincularProvinciaConMunicipios(spProvB, spMunB, false);
 
-        // Si pulsa una sugerencia, también carga
+        // Carga los municipios al seleccionar una provincia del desplegable
         spProvA.setOnItemClickListener((parent, view, position, id) -> {
             String provSeleccionada = spProvA.getText().toString().trim();
             cargarMunicipiosSiProvinciaValida(provSeleccionada, true);
@@ -120,21 +182,21 @@ public class ComparativaActivity extends AppCompatActivity {
             cargarMunicipiosSiProvinciaValida(provSeleccionada, false);
         });
 
-        // ✅ Comprobación rápida de KEY
-        if (KEY == null || KEY.trim().isEmpty() || KEY.equals("PON_AQUI_TU_KEY")) {
-            Toast.makeText(this, "Falta la KEY de GeoAPI en ComparativaActivity (variable KEY).", Toast.LENGTH_LONG).show();
-            return;
-        }
-
+        // Carga inicial de provincias al abrir la pantalla
         cargarProvincias();
     }
 
+    /**
+     * Configura un AutoCompleteTextView para que muestre el desplegable
+     * automáticamente al obtener foco, hacer click o escribir.
+     *
+     * @param actv campo de autocompletado
+     */
     private void autoShowDropdown(AutoCompleteTextView actv) {
         actv.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) actv.post(actv::showDropDown);
         });
 
-        // Al tocar el campo, abre siempre
         actv.setOnClickListener(v -> actv.showDropDown());
 
         actv.addTextChangedListener(new TextWatcher() {
@@ -148,7 +210,17 @@ public class ComparativaActivity extends AppCompatActivity {
         });
     }
 
-    private void vincularProvinciaConMunicipios(AutoCompleteTextView prov, AutoCompleteTextView mun, boolean esPuntoA) {
+    /**
+     * Vincula el campo de provincia con su correspondiente campo de municipios.
+     * Cuando el texto coincide exactamente con una provincia ,
+     * se cargan automáticamente sus municipios.
+     *
+     * @param prov campo de provincia
+     * @param mun campo de municipio asociado
+     * @param esPuntoA indica si se trata del punto A o del punto B
+     */
+    private void vincularProvinciaConMunicipios(AutoCompleteTextView prov,AutoCompleteTextView mun,boolean esPuntoA) {
+
         prov.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
@@ -158,6 +230,7 @@ public class ComparativaActivity extends AppCompatActivity {
                 if (s == null) return;
                 String texto = s.toString().trim();
 
+                // Evita recargar si el texto no ha cambiado
                 if (esPuntoA) {
                     if (texto.equals(ultimaProvA)) return;
                     ultimaProvA = texto;
@@ -167,16 +240,20 @@ public class ComparativaActivity extends AppCompatActivity {
                 }
 
                 if (provinciaNombreToCpro.containsKey(texto)) {
-                    android.util.Log.d("MeteoDuo", "Provincia detectada: " + texto + ". Cargando municipios...");
                     mun.setText("");
                     cargarMunicipiosSiProvinciaValida(texto, esPuntoA);
-                } else {
-                    if (texto.isEmpty()) limpiarMunicipios(esPuntoA);
+                } else if (texto.isEmpty()) {
+                    limpiarMunicipios(esPuntoA);
                 }
             }
         });
     }
 
+    /**
+     * Limpia la lista de municipios del punto indicado.
+     *
+     * @param esPuntoA true si corresponde al punto A, false para el punto B
+     */
     private void limpiarMunicipios(boolean esPuntoA) {
         if (esPuntoA) {
             municipiosA.clear();
@@ -187,11 +264,22 @@ public class ComparativaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Comprueba si la provincia existe en el mapa y, en ese caso,
+     * obtiene su código y carga los municipios correspondientes.
+     *
+     * @param nombreProvincia nombre de la provincia
+     * @param esPuntoA indica si se trata del punto A o del punto B
+     */
     private void cargarMunicipiosSiProvinciaValida(String nombreProvincia, boolean esPuntoA) {
         String cpro = provinciaNombreToCpro.get(nombreProvincia);
         if (cpro != null) cargarMunicipios(cpro, esPuntoA);
     }
 
+    /**
+     * Realiza una petición a GeoAPI para obtener la lista de provincias
+     * y preparar los datos necesarios para el autocompletado.
+     */
     private void cargarProvincias() {
         provinciaNombres.clear();
         provinciaNombreToCpro.clear();
@@ -206,53 +294,36 @@ public class ComparativaActivity extends AppCompatActivity {
                 response -> {
                     try {
                         JSONArray data = response.getJSONArray("data");
-                        android.util.Log.d("MeteoDuo", "Provincias recibidas API: " + data.length());
 
                         for (int i = 0; i < data.length(); i++) {
                             JSONObject item = data.getJSONObject(i);
-
                             String cpro = item.optString("CPRO", "").trim();
                             String nombre = item.optString("PRO", "").trim();
 
                             if (!cpro.isEmpty() && !nombre.isEmpty()) {
-                                String nombreOk = capitalizar(nombre);
-                                provinciaNombres.add(nombreOk);
-                                provinciaNombreToCpro.put(nombreOk, cpro);
+                                provinciaNombres.add(Mayuscula(nombre));
+                                provinciaNombreToCpro.put(Mayuscula(nombre), cpro);
                             }
                         }
 
-                        android.util.Log.d("MeteoDuo", "Provincias en lista: " + provinciaNombres.size());
-
                         adapterProv.notifyDataSetChanged();
-                        spProvA.post(() -> spProvA.showDropDown());
-
-                        if (provinciaNombres.isEmpty()) {
-                            Toast.makeText(this, "No se han recibido provincias.", Toast.LENGTH_LONG).show();
-                        }
                     } catch (Exception e) {
-                        Toast.makeText(this, "Error parseando provincias: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
+                        Toast.makeText(this, "Error parseando provincias", Toast.LENGTH_LONG).show();
                     }
                 },
-                error -> {
-                    String body = "";
-                    if (error.networkResponse != null && error.networkResponse.data != null) {
-                        body = new String(error.networkResponse.data);
-                    }
-                    android.util.Log.e("MeteoDuo", "Volley error: " + error.toString() + " BODY=" + body);
-
-                    // ✅ Mensaje claro si la KEY falla
-                    if (error.networkResponse != null && error.networkResponse.statusCode == 403) {
-                        Toast.makeText(this, "GeoAPI 403: KEY inválida o no proporcionada.", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(this, "Error red. Mira Logcat", Toast.LENGTH_LONG).show();
-                    }
-                }
+                error -> Toast.makeText(this, "Error de red al cargar provincias", Toast.LENGTH_LONG).show()
         );
 
         queue.add(req);
     }
 
+    /**
+     * Realiza una petición a GeoAPI para obtener los municipios de una provincia
+     * concreta a partir de su código (CPRO).
+     *
+     * @param cpro código de la provincia
+     * @param esPuntoA indica si los datos son para el punto A o B
+     */
     private void cargarMunicipios(String cpro, boolean esPuntoA) {
         List<String> destino = esPuntoA ? municipiosA : municipiosB;
         ArrayAdapter<String> adapter = esPuntoA ? adapterMunA : adapterMunB;
@@ -266,49 +337,36 @@ public class ComparativaActivity extends AppCompatActivity {
                 response -> {
                     try {
                         JSONArray data = response.getJSONArray("data");
-
                         destino.clear();
                         adapter.clear();
 
                         for (int i = 0; i < data.length(); i++) {
-                            JSONObject item = data.getJSONObject(i);
-                            String nombre = item.optString("DMUN50", "").trim();
-                            if (!nombre.isEmpty()) destino.add(capitalizar(nombre));
+                            String nombre = data.getJSONObject(i)
+                                    .optString("DMUN50", "").trim();
+                            if (!nombre.isEmpty()) destino.add(Mayuscula(nombre));
                         }
 
                         adapter.addAll(destino);
                         adapter.notifyDataSetChanged();
-
-                        if (destino.isEmpty()) {
-                            Toast.makeText(this, "No hay municipios", Toast.LENGTH_SHORT).show();
-                        }
                     } catch (Exception e) {
-                        Toast.makeText(this, "Error parseando municipios: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
+                        Toast.makeText(this, "Error parseando municipios", Toast.LENGTH_LONG).show();
                     }
                 },
-                error -> {
-                    String body = "";
-                    if (error.networkResponse != null && error.networkResponse.data != null) {
-                        body = new String(error.networkResponse.data);
-                    }
-                    android.util.Log.e("MeteoDuo", "Volley error: " + error.toString() + " BODY=" + body);
-
-                    if (error.networkResponse != null && error.networkResponse.statusCode == 403) {
-                        Toast.makeText(this, "GeoAPI 403: KEY inválida o no proporcionada.", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(this, "Error red. Mira Logcat", Toast.LENGTH_LONG).show();
-                    }
-                }
+                error -> Toast.makeText(this, "Error de red al cargar municipios", Toast.LENGTH_LONG).show()
         );
 
         queue.add(req);
     }
 
-    private String capitalizar(String s) {
-        if (s == null) return "";
+    /**
+     * El texto se mostrará con la primera letra en mayúscula
+     *
+     * @param s texto original
+     * @return texto capitalizado
+     */
+    private String Mayuscula(String s) {
+        if (s == null || s.isEmpty()) return "";
         s = s.toLowerCase().trim();
-        if (s.isEmpty()) return "";
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 }
