@@ -139,8 +139,11 @@ public class ComparativaActivity extends AppCompatActivity {
         spProvB = findViewById(R.id.autoCompleteTextView2);
         spMunB  = findViewById(R.id.autoCompleteTextView4);
 
+        //Botón volver
+
+        Button btnVolver=findViewById(R.id.btnVolvercom);
         //Botón buscar
-        Button btnBuscar = findViewById(R.id.btnCrearCuenta2);
+        Button btnBuscar = findViewById(R.id.btnBuscar);
 
 
         // El autocompletado se activa a partir de una letra
@@ -193,6 +196,9 @@ public class ComparativaActivity extends AppCompatActivity {
             String provSeleccionada = spProvB.getText().toString().trim();
             cargarMunicipiosSiProvinciaValida(provSeleccionada, false);
         });
+
+        //BOTÓN VOLVER
+        btnVolver.setOnClickListener(v -> finish());
 
         //  BOTÓN BUSCAR: valida y abre ResultadosActivity
         btnBuscar.setOnClickListener(v -> {

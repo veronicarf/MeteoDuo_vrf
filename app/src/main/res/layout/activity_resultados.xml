@@ -27,13 +27,15 @@
         android:id="@+id/tvTituloResultados"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="RESULTADOS"
-        android:textStyle="bold"
-        android:textSize="34sp"
+        android:fontFamily="casual"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="RESULTADOS"
+        android:textColor="@color/boton"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Caja cabecera estilo "marco" -->
     <androidx.cardview.widget.CardView
@@ -57,26 +59,29 @@
             android:background="@drawable/fondo_resultados">
 
 
-
             <TextView
                 android:id="@+id/tvPuntos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Municipio (Provincia) - Municipio (Provincia)"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center"
-                android:textColor="@android:color/black"/>
+                android:text="Municipio (Provincia) - Municipio (Provincia)"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvRango"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="dd/MM/yyyy a dd/MM/yyyy"
-                android:textSize="14sp"
+                android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center"
-                android:textColor="@android:color/black"/>
+                android:text="dd/MM/yyyy a dd/MM/yyyy"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

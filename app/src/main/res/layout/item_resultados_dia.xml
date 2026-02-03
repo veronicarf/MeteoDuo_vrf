@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginBottom="14dp">
+    android:layout_marginBottom="14dp"
+    android:background="@drawable/fondo_resultados">
+    >
 
     <!-- Fecha -->
     <TextView
@@ -31,13 +33,16 @@
             android:padding="12dp">
 
             <TextView
+                android:id="@+id/txtresultados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Resultados"
-                android:textStyle="bold"
-                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="casual"
                 android:gravity="center"
-                android:layout_marginBottom="8dp"/>
+                android:text="Resultados"
+                android:textColor="@color/boton"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <!-- Encabezados A / B -->
             <LinearLayout
@@ -51,9 +56,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center"
                     android:text="PUNTO A"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textColor="@color/boton"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -67,9 +74,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center"
                     android:text="PUNTO B"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textColor="@color/boton"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- FILA: Temp Max -->
@@ -92,9 +101,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center"
                     android:text="Temp Max"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textColor="@color/text"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvB_TempMax"
@@ -125,9 +136,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center"
                     android:text="Temp Min"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textColor="@color/text"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvB_TempMin"
@@ -158,9 +171,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center"
                     android:text="Viento"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textColor="@color/text"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvB_Viento"
@@ -191,9 +206,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center"
                     android:text="Precipitación"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textColor="@color/text"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvB_Prec"
@@ -224,9 +241,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center"
                     android:text="Cielo"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textColor="@color/text"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvB_Cielo"
