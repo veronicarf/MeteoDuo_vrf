@@ -7,6 +7,21 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- ===================== -->
+    <!-- SECCIÓN: Fondo        -->
+    <!-- ===================== -->
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.8"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/textura"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
     <!-- Título grande -->
     <TextView
         android:id="@+id/tvTituloResultados"
@@ -26,8 +41,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@id/tvTituloResultados"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -36,16 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="12dp"
+            android:background="@drawable/fondo_resultados">
 
-            <TextView
-                android:id="@+id/tvSubTitulo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RESULTADOS"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:gravity="center"/>
 
 
             <TextView
@@ -55,9 +65,8 @@
                 android:layout_marginTop="4dp"
                 android:text="Municipio (Provincia) - Municipio (Provincia)"
                 android:textSize="16sp"
-                android:gravity="center"/>
-
-
+                android:gravity="center"
+                android:textColor="@android:color/black"/>
 
             <TextView
                 android:id="@+id/tvRango"
@@ -66,11 +75,12 @@
                 android:layout_marginTop="4dp"
                 android:text="dd/MM/yyyy a dd/MM/yyyy"
                 android:textSize="14sp"
-                android:gravity="center"/>
-
+                android:gravity="center"
+                android:textColor="@android:color/black"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 
     <!-- Scroll de resultados (va bajando) -->
     <ScrollView
@@ -93,7 +103,7 @@
 
     </ScrollView>
 
-    <!-- Botones abajo -->
+    <!-- Botones  -->
     <LinearLayout
         android:id="@+id/barraBotones"
         android:layout_width="0dp"
