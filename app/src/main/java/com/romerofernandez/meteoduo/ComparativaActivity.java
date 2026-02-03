@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
@@ -113,6 +114,12 @@ public class ComparativaActivity extends AppCompatActivity {
      */
     private String ultimaProvA = "";
     private String ultimaProvB = "";
+
+    /**
+     * Botón que accederá a la ventana de resultados
+     */
+
+    Button btnBuscar = findViewById(R.id.btnCrearCuenta2);
 
     /**
      * Método principal de inicialización de la Activity.
