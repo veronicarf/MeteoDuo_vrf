@@ -200,58 +200,8 @@ public class ComparativaActivity extends AppCompatActivity {
         //BOTÓN VOLVER
         btnVolver.setOnClickListener(v -> finish());
 
-        //  BOTÓN BUSCAR: valida y abre ResultadosActivity
-        btnBuscar.setOnClickListener(v -> {
+        btnBuscar.setOnClickListener(v -> buscarComparativa());
 
-            String provA = spProvA.getText().toString().trim();
-            String munA  = spMunA.getText().toString().trim();
-            String provB = spProvB.getText().toString().trim();
-            String munB  = spMunB.getText().toString().trim();
-
-            // Validación provincias
-
-            if (!provinciaNombreToCpro.containsKey(provA)) {
-                Toast.makeText(this, "Selecciona una provincia válida en Punto A", Toast.LENGTH_LONG).show();
-                spProvA.requestFocus();
-                spProvA.showDropDown();
-                return;
-            }
-            if (!provinciaNombreToCpro.containsKey(provB)) {
-                Toast.makeText(this, "Selecciona una provincia válida en Punto B", Toast.LENGTH_LONG).show();
-                spProvB.requestFocus();
-                spProvB.showDropDown();
-                return;
-            }
-
-            // Validación municipios
-
-            if (!municipiosA.contains(munA)) {
-                Toast.makeText(this, "Selecciona un municipio válido en Punto A", Toast.LENGTH_LONG).show();
-                spMunA.requestFocus();
-                spMunA.showDropDown();
-                return;
-            }
-            if (!municipiosB.contains(munB)) {
-                Toast.makeText(this, "Selecciona un municipio válido en Punto B", Toast.LENGTH_LONG).show();
-                spMunB.requestFocus();
-                spMunB.showDropDown();
-                return;
-            }
-
-            String puntoA = munA + " (" + provA + ")";
-            String puntoB = munB + " (" + provB + ")";
-
-            // Fecha inicio , es decir, hoy
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            String fechaInicio = sdf.format(Calendar.getInstance().getTime());
-
-            Intent i = new Intent(ComparativaActivity.this, ResultadosActivity.class);
-            i.putExtra("puntoA", puntoA);
-            i.putExtra("puntoB", puntoB);
-            i.putExtra("fechaInicio", fechaInicio);
-            startActivity(i);
-        });
         // Carga inicial de provincias al abrir la pantalla
         cargarProvincias();
     }
@@ -439,4 +389,156 @@ public class ComparativaActivity extends AppCompatActivity {
         s = s.toLowerCase().trim();
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
+    private void geocodeMunicipio(String municipio, String provincia,
+                                  java.util.function.BiConsumer<Double, Double> onOk,
+                                  Runnable onFail) {
+
+        new Thread(() -> {
+            try {
+                android.location.Geocoder geocoder =
+                        new android.location.Geocoder(this, java.util.Locale.getDefault());
+
+                String query = municipio + ", " + provincia + ", España";
+                java.util.List<android.location.Address> res = geocoder.getFromLocationName(query, 1);
+
+                if (res != null && !res.isEmpty()) {
+                    double lat = res.get(0).getLatitude();
+                    double lon = res.get(0).getLongitude();
+                    runOnUiThread(() -> onOk.accept(lat, lon));
+                } else {
+                    runOnUiThread(onFail);
+                }
+            } catch (Exception e) {
+                runOnUiThread(onFail);
+            }
+        }).start();
+    }
+
+    private String buildOpenMeteoUrl(double lat, double lon) {
+        return "https://api.open-meteo.com/v1/forecast"
+                + "?latitude=" + lat
+                + "&longitude=" + lon
+                + "&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,windspeed_10m_max,weathercode"
+                + "&forecast_days=3"
+                + "&timezone=auto";
+    }
+    private void buscarComparativa() {
+
+        String provA = spProvA.getText().toString().trim();
+        String munA  = spMunA.getText().toString().trim();
+        String provB = spProvB.getText().toString().trim();
+        String munB  = spMunB.getText().toString().trim();
+
+        // 1) Validaciones
+        if (!validarSeleccion(provA, munA, true)) return;
+        if (!validarSeleccion(provB, munB, false)) return;
+
+        String puntoA = munA + " (" + provA + ")";
+        String puntoB = munB + " (" + provB + ")";
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String fechaInicio = sdf.format(Calendar.getInstance().getTime());
+
+        Toast.makeText(this, "Buscando coordenadas y tiempo real...", Toast.LENGTH_SHORT).show();
+
+        // 2) Geocoding A
+        geocodeMunicipio(munA, provA, (latA, lonA) -> {
+
+            // 3) Geocoding B
+            geocodeMunicipio(munB, provB, (latB, lonB) -> {
+
+                // 4) Cargar tiempo real A y B y abrir resultados cuando esté todo
+                cargarTiempoDosPuntos(latA, lonA, latB, lonB, puntoA, puntoB, fechaInicio);
+
+            }, () -> Toast.makeText(this, "No se han encontrado coordenadas para Punto B", Toast.LENGTH_LONG).show());
+
+        }, () -> Toast.makeText(this, "No se han encontrado coordenadas para Punto A", Toast.LENGTH_LONG).show());
+    }
+    private boolean validarSeleccion(String prov, String mun, boolean esPuntoA) {
+
+        if (!provinciaNombreToCpro.containsKey(prov)) {
+            Toast.makeText(this,
+                    esPuntoA ? "Selecciona una provincia válida en Punto A" : "Selecciona una provincia válida en Punto B",
+                    Toast.LENGTH_LONG).show();
+
+            if (esPuntoA) {
+                spProvA.requestFocus();
+                spProvA.showDropDown();
+            } else {
+                spProvB.requestFocus();
+                spProvB.showDropDown();
+            }
+            return false;
+        }
+
+        List<String> listaMun = esPuntoA ? municipiosA : municipiosB;
+        if (!listaMun.contains(mun)) {
+            Toast.makeText(this,
+                    esPuntoA ? "Selecciona un municipio válido en Punto A" : "Selecciona un municipio válido en Punto B",
+                    Toast.LENGTH_LONG).show();
+
+            if (esPuntoA) {
+                spMunA.requestFocus();
+                spMunA.showDropDown();
+            } else {
+                spMunB.requestFocus();
+                spMunB.showDropDown();
+            }
+            return false;
+        }
+
+        return true;
+    }
+    private void cargarTiempoDosPuntos(double latA, double lonA, double latB, double lonB,
+                                       String puntoA, String puntoB, String fechaInicio) {
+
+        final org.json.JSONObject[] jsonA = new org.json.JSONObject[1];
+        final org.json.JSONObject[] jsonB = new org.json.JSONObject[1];
+
+        cargarTiempoOpenMeteo(latA, lonA,
+                respA -> {
+                    jsonA[0] = respA;
+                    if (jsonB[0] != null) abrirResultados(puntoA, puntoB, fechaInicio, jsonA[0], jsonB[0]);
+                },
+                err -> Toast.makeText(this, "Error tiempo Punto A", Toast.LENGTH_LONG).show()
+        );
+
+        cargarTiempoOpenMeteo(latB, lonB,
+                respB -> {
+                    jsonB[0] = respB;
+                    if (jsonA[0] != null) abrirResultados(puntoA, puntoB, fechaInicio, jsonA[0], jsonB[0]);
+                },
+                err -> Toast.makeText(this, "Error tiempo Punto B", Toast.LENGTH_LONG).show()
+        );
+    }
+    private void abrirResultados(String puntoA, String puntoB, String fechaInicio,
+                                 org.json.JSONObject jsonA, org.json.JSONObject jsonB) {
+
+        Intent i = new Intent(ComparativaActivity.this, ResultadosActivity.class);
+        i.putExtra("puntoA", puntoA);
+        i.putExtra("puntoB", puntoB);
+        i.putExtra("fechaInicio", fechaInicio);
+        i.putExtra("jsonA", jsonA.toString());
+        i.putExtra("jsonB", jsonB.toString());
+        startActivity(i);
+    }
+
+   private void cargarTiempoOpenMeteo(double lat, double lon,
+                                       com.android.volley.Response.Listener<org.json.JSONObject> ok,
+                                       com.android.volley.Response.ErrorListener fail) {
+
+        String url = buildOpenMeteoUrl(lat, lon);
+
+        com.android.volley.toolbox.JsonObjectRequest req =
+                new com.android.volley.toolbox.JsonObjectRequest(
+                        com.android.volley.Request.Method.GET,
+                        url,
+                        null,
+                        ok,
+                        fail
+                );
+
+        queue.add(req);
+    }
+
 }
