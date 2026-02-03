@@ -47,23 +47,27 @@
                 android:textSize="18sp"
                 android:gravity="center"/>
 
+
             <TextView
                 android:id="@+id/tvPuntos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="punto a - punto b"
+                android:text="Municipio (Provincia) - Municipio (Provincia)"
                 android:textSize="16sp"
                 android:gravity="center"/>
+
+
 
             <TextView
                 android:id="@+id/tvRango"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Hoy + 3 días: 03/02/2026 a 05/02/2026"
+                android:text="dd/MM/yyyy a dd/MM/yyyy"
                 android:textSize="14sp"
                 android:gravity="center"/>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -1,4 +1,5 @@
 package com.romerofernandez.meteoduo;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,9 +14,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -115,11 +120,7 @@ public class ComparativaActivity extends AppCompatActivity {
     private String ultimaProvA = "";
     private String ultimaProvB = "";
 
-    /**
-     * Botón que accederá a la ventana de resultados
-     */
 
-    Button btnBuscar = findViewById(R.id.btnCrearCuenta2);
 
     /**
      * Método principal de inicialización de la Activity.
@@ -137,6 +138,10 @@ public class ComparativaActivity extends AppCompatActivity {
         spMunA  = findViewById(R.id.autoCompleteTextView3);
         spProvB = findViewById(R.id.autoCompleteTextView2);
         spMunB  = findViewById(R.id.autoCompleteTextView4);
+
+        //Botón buscar
+        Button btnBuscar = findViewById(R.id.btnCrearCuenta2);
+
 
         // El autocompletado se activa a partir de una letra
         spProvA.setThreshold(1);
@@ -189,6 +194,58 @@ public class ComparativaActivity extends AppCompatActivity {
             cargarMunicipiosSiProvinciaValida(provSeleccionada, false);
         });
 
+        //  BOTÓN BUSCAR: valida y abre ResultadosActivity
+        btnBuscar.setOnClickListener(v -> {
+
+            String provA = spProvA.getText().toString().trim();
+            String munA  = spMunA.getText().toString().trim();
+            String provB = spProvB.getText().toString().trim();
+            String munB  = spMunB.getText().toString().trim();
+
+            // Validación provincias
+
+            if (!provinciaNombreToCpro.containsKey(provA)) {
+                Toast.makeText(this, "Selecciona una provincia válida en Punto A", Toast.LENGTH_LONG).show();
+                spProvA.requestFocus();
+                spProvA.showDropDown();
+                return;
+            }
+            if (!provinciaNombreToCpro.containsKey(provB)) {
+                Toast.makeText(this, "Selecciona una provincia válida en Punto B", Toast.LENGTH_LONG).show();
+                spProvB.requestFocus();
+                spProvB.showDropDown();
+                return;
+            }
+
+            // Validación municipios
+
+            if (!municipiosA.contains(munA)) {
+                Toast.makeText(this, "Selecciona un municipio válido en Punto A", Toast.LENGTH_LONG).show();
+                spMunA.requestFocus();
+                spMunA.showDropDown();
+                return;
+            }
+            if (!municipiosB.contains(munB)) {
+                Toast.makeText(this, "Selecciona un municipio válido en Punto B", Toast.LENGTH_LONG).show();
+                spMunB.requestFocus();
+                spMunB.showDropDown();
+                return;
+            }
+
+            String puntoA = munA + " (" + provA + ")";
+            String puntoB = munB + " (" + provB + ")";
+
+            // Fecha inicio , es decir, hoy
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            String fechaInicio = sdf.format(Calendar.getInstance().getTime());
+
+            Intent i = new Intent(ComparativaActivity.this, ResultadosActivity.class);
+            i.putExtra("puntoA", puntoA);
+            i.putExtra("puntoB", puntoB);
+            i.putExtra("fechaInicio", fechaInicio);
+            startActivity(i);
+        });
         // Carga inicial de provincias al abrir la pantalla
         cargarProvincias();
     }
