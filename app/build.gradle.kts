@@ -35,15 +35,19 @@ android {
 }
 
 dependencies {
-//FireBase
+    // Firebase
     implementation(platform("com.google.firebase:firebase-bom:34.8.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
-//*******************************
+
+    // Para obtener provincias y municipios (GeoAPI con Volley)
+    implementation("com.android.volley:volley:1.2.1")
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

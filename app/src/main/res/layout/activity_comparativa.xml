@@ -13,10 +13,6 @@
     <!-- ===================== -->
 
 
-    <!-- ===================== -->
-    <!-- SECCIÓN: Título       -->
-    <!-- ===================== -->
-
     <ImageView
         android:id="@+id/bg"
         android:layout_width="0dp"
@@ -27,11 +23,14 @@
         android:src="@drawable/textura"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <!-- ===================== -->
+    <!-- SECCIÓN: Título       -->
+    <!-- ===================== -->
     <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
@@ -88,6 +87,7 @@
         android:id="@+id/autoCompleteTextView"
         android:layout_width="222dp"
         android:layout_height="39dp"
+        android:inputType="text"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/autocomplete"
@@ -98,10 +98,13 @@
         app:layout_constraintTop_toTopOf="@id/textView6"
         app:layout_constraintVertical_bias="0.437" />
 
+
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView3"
         android:layout_width="222dp"
         android:layout_height="39dp"
+        android:inputType="text"
+        android:completionThreshold="1"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/autocompletem"
@@ -111,12 +114,7 @@
         app:layout_constraintTop_toTopOf="@id/textView7"
         app:layout_constraintBottom_toBottomOf="@id/textView7" />
 
-    <!-- ===================== -->
-    <!-- SECCIÓN: Punto B      -->
-    <!-- ===================== -->
-
-
-    <TextView
+        <TextView
         android:id="@+id/textView7"
         android:layout_width="208dp"
         android:layout_height="23dp"
@@ -129,6 +127,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView6" />
 
+    <!-- ===================== -->
+    <!-- SECCIÓN: Punto B      -->
+    <!-- ===================== -->
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -148,7 +149,7 @@
         android:layout_width="263dp"
         android:layout_height="23dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/provincia"
@@ -178,22 +179,24 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView2"
-        android:layout_width="253dp"
-        android:layout_height="23dp"
+        android:layout_width="222dp"
+        android:layout_height="39dp"
+        android:inputType="text"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/autocomplete"
-        app:layout_constraintStart_toEndOf="@id/textView9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textView9"
         app:layout_constraintBottom_toBottomOf="@id/textView9"
-        app:layout_constraintHorizontal_bias="0.947"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toEndOf="@id/textView9"
+        app:layout_constraintTop_toTopOf="@id/textView9"
+        app:layout_constraintVertical_bias="0.0" />
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView4"
-        android:layout_width="253dp"
-        android:layout_height="23dp"
+        android:layout_width="222dp"
+        android:layout_height="39dp"
+        android:inputType="text"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/autocompletem"
@@ -203,7 +206,22 @@
         app:layout_constraintBottom_toBottomOf="@id/textView8"
         app:layout_constraintHorizontal_bias="0.947"
         />
-
-
+    <!-- ===================== -->
+    <!--       BOTÓN      -->
+    <!-- ===================== -->
+    <Button
+        android:id="@+id/btnCrearCuenta2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/boton"
+        android:text="@string/look_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.72"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintWidth_max="320dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
