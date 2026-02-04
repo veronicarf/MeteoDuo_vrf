@@ -1,8 +1,10 @@
 package com.romerofernandez.meteoduo;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -144,7 +146,7 @@ public class ComparativaActivity extends AppCompatActivity {
         // Botón buscar
         Button btnBuscar = findViewById(R.id.btnBuscar);
 
-        // El autocompletado se activa a partir de una letra
+        // El autocompletado se activa desde al poner la pimera letra
         spProvA.setThreshold(1);
         spProvB.setThreshold(1);
         spMunA.setThreshold(1);
@@ -188,11 +190,16 @@ public class ComparativaActivity extends AppCompatActivity {
         spProvA.setOnItemClickListener((parent, view, position, id) -> {
             String provSeleccionada = spProvA.getText().toString().trim();
             cargarMunicipiosSiProvinciaValida(provSeleccionada, true);
+
+            // cuando cargue municipios, quiero que se vea ya
+            spMunA.post(() -> spMunA.showDropDown());
         });
 
         spProvB.setOnItemClickListener((parent, view, position, id) -> {
             String provSeleccionada = spProvB.getText().toString().trim();
             cargarMunicipiosSiProvinciaValida(provSeleccionada, false);
+
+            spMunB.post(() -> spMunB.showDropDown());
         });
 
         // BOTÓN VOLVER
@@ -206,11 +213,12 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que configura un AutoCompleteTextView para que muestre el desplegable automáticamente
+     * Método que configura un AutoCompleteTextView para que muestre cunado seleccionamos
      *
      * @param actv Campo de autocompletado a configurar
      */
     private void autoShowDropdown(AutoCompleteTextView actv) {
+
         actv.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) actv.post(actv::showDropDown);
         });
@@ -219,14 +227,19 @@ public class ComparativaActivity extends AppCompatActivity {
 
         actv.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s != null && s.length() >= 1 && actv.hasFocus()) {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Solo fuerzo showDropDown si realmente está escribiendo
+                if (actv.hasFocus() && s != null && s.length() > 0) {
                     actv.post(actv::showDropDown);
                 }
             }
+
             @Override public void afterTextChanged(Editable s) {}
         });
     }
+
 
     /**
      * Método que vincula el campo de provincia con su correspondiente campo de municipios.
@@ -362,6 +375,8 @@ public class ComparativaActivity extends AppCompatActivity {
 
                         adapter.addAll(destino);
                         adapter.notifyDataSetChanged();
+
+
                     } catch (Exception e) {
                         Toast.makeText(this, "Error parseando municipios", Toast.LENGTH_LONG).show();
                     }
@@ -603,4 +618,7 @@ public class ComparativaActivity extends AppCompatActivity {
 
         queue.add(req);
     }
+
+
+
 }

@@ -18,16 +18,18 @@
         tools:targetApi="31">
         <activity
             android:name=".ComparativaActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
-
-        <!--android:exported="false" />-->
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:exported="false" />
         <activity
             android:name=".ActivityUsuario"
             android:exported="false" />
         <activity
             android:name=".ActivityAdministrador"
             android:exported="false" />
+        <activity
+            android:name=".HistorialActivity"
+            android:exported="false" />
+
 
         <activity
             android:name=".RegisterActivity"
