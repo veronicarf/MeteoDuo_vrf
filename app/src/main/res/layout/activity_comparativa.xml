@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ComparativaActivity">
+    android:layout_height="match_parent">
 
-
-    <!-- ===================== -->
-    <!-- SECCIÓN: Fondo        -->
-    <!-- ===================== -->
-
-
+    <!-- FONDO -->
     <ImageView
         android:id="@+id/bg"
         android:layout_width="0dp"
@@ -21,227 +14,203 @@
         android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:src="@drawable/textura"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ===================== -->
-    <!-- SECCIÓN: Título       -->
-    <!-- ===================== -->
-    <TextView
-        android:id="@+id/textView4"
+    <!-- SCROLL ENCIMA DEL FONDO -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollComparativa"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:text="@string/tu_destino"
-        android:textColor="@color/boton"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:padding="16dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- ===================== -->
-    <!-- SECCIÓN: Punto A      -->
-    <!-- ===================== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="64dp"
-        android:fontFamily="casual"
-        android:text="@string/punto_a"
-        android:textColor="@color/text"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView4" />
+            <!-- TÍTULO -->
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:text="@string/tu_destino"
+                android:textColor="@color/boton"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="253dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/provincia"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView5" />
+            <!-- PUNTO A -->
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="casual"
+                android:text="@string/punto_a"
+                android:textColor="@color/text"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView"
-        android:layout_width="222dp"
-        android:layout_height="39dp"
-        android:inputType="text"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/autocomplete"
-        app:layout_constraintBottom_toBottomOf="@id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toEndOf="@id/textView6"
-        app:layout_constraintTop_toTopOf="@id/textView6"
-        android:dropDownHeight="200dp"
-        app:layout_constraintVertical_bias="0.437" />
+            <!-- FILA PROVINCIA A -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="@string/provincia"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView3"
-        android:layout_width="222dp"
-        android:layout_height="39dp"
-        android:inputType="text"
-        android:completionThreshold="1"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/autocompletem"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toEndOf="@id/textView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textView7"
-        android:dropDownHeight="200dp"
-        app:layout_constraintBottom_toBottomOf="@id/textView7" />
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/autocomplete"
+                    android:inputType="text"
+                    android:dropDownHeight="200dp"
+                    android:padding="8dp" />
+            </LinearLayout>
 
-        <TextView
-        android:id="@+id/textView7"
-        android:layout_width="208dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="48dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/municipio"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView6" />
+            <!-- FILA MUNICIPIO A -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-    <!-- ===================== -->
-    <!-- SECCIÓN: Punto B      -->
-    <!-- ===================== -->
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
-        android:fontFamily="casual"
-        android:text="@string/punto_b"
-        android:textColor="@color/text"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView7" />
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="@string/municipio"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="263dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/provincia"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView3" />
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/autocompletem"
+                    android:inputType="text"
+                    android:completionThreshold="1"
+                    android:dropDownHeight="200dp"
+                    android:padding="8dp" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="270dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/municipio"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.258"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView9" />
+            <!-- PUNTO B -->
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="casual"
+                android:text="@string/punto_b"
+                android:textColor="@color/text"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
+            <!-- FILA PROVINCIA B -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView2"
-        android:layout_width="222dp"
-        android:layout_height="39dp"
-        android:inputType="text"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/autocomplete"
-        app:layout_constraintBottom_toBottomOf="@id/textView9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.953"
-        app:layout_constraintStart_toEndOf="@id/textView9"
-        app:layout_constraintTop_toTopOf="@id/textView9"
-        android:dropDownHeight="200dp"
-        app:layout_constraintVertical_bias="0.0" />
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="@string/provincia"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView4"
-        android:layout_width="222dp"
-        android:layout_height="39dp"
-        android:inputType="text"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/autocompletem"
-        app:layout_constraintStart_toEndOf="@id/textView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textView8"
-        app:layout_constraintBottom_toBottomOf="@id/textView8"
-        android:dropDownHeight="200dp"
-        app:layout_constraintHorizontal_bias="0.947"
-        />
-    <!-- ===================== -->
-    <!--       BOTÓN      -->
-    <!-- ===================== -->
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/autocomplete"
+                    android:inputType="text"
+                    android:dropDownHeight="200dp"
+                    android:padding="8dp" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/btnBuscar"
-        android:layout_width="257dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="@color/boton"
-        android:text="@string/look_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintWidth_max="320dp" />
+            <!-- FILA MUNICIPIO B -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-    <Button
-        android:id="@+id/btnVolvercom"
-        android:layout_width="219dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="@color/boton"
-        android:text="@string/back_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.625"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintWidth_max="320dp" />
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="@string/municipio"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/autocompletem"
+                    android:inputType="text"
+                    android:dropDownHeight="200dp"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- BOTÓN BUSCAR -->
+            <Button
+                android:id="@+id/btnBuscar"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="28dp"
+                android:backgroundTint="@color/boton"
+                android:text="@string/look_button" />
+
+            <!-- BOTÓN VOLVER -->
+            <Button
+                android:id="@+id/btnVolvercom"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="@color/boton"
+                android:text="@string/back_button" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-

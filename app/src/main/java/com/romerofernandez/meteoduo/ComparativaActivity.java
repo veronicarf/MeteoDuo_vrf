@@ -23,13 +23,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+
 /**
- * Activity encargada de la comparación de localizaciones.
+ * ComparativaActivity
  *
- * En esta pantalla se permite seleccionar dos puntos distintos (A y B),
- * eligiendo una provincia y posteriormente un municipio mediante campos
- * de autocompletado. Los datos se obtienen desde la API GeoAPI utilizando
- * peticiones HTTP gestionadas con la librería Volley.
+ * Actividad encargada de permitir al usuario comparar el tiempo entre dos puntos:
+ * - Punto B: Provincia + Municipio
+ *
+ * @author Verónica
  */
 public class ComparativaActivity extends AppCompatActivity {
 
@@ -39,8 +40,7 @@ public class ComparativaActivity extends AppCompatActivity {
 
     /**
      * Campos de autocompletado para provincias y municipios.
-     * Se utilizan dos  campos, uno para el punto A y otro para el punto B.
-     */
+    */
     private AutoCompleteTextView spProvA, spMunA, spProvB, spMunB;
 
     // -----------------------------
@@ -49,7 +49,6 @@ public class ComparativaActivity extends AppCompatActivity {
 
     /**
      * Cola de peticiones de red utilizada por Volley.
-     * En ella se encolan todas las peticiones HTTP que realiza la aplicación.
      */
     private RequestQueue queue;
 
@@ -59,7 +58,6 @@ public class ComparativaActivity extends AppCompatActivity {
 
     /**
      * Lista con los nombres de las provincias obtenidas de la API.
-     * Se utiliza como fuente de datos para el autocompletado.
      */
     private final List<String> provinciaNombres = new ArrayList<>();
 
@@ -83,8 +81,7 @@ public class ComparativaActivity extends AppCompatActivity {
     // -----------------------------
 
     /**
-     * Adapters utilizados por los AutoCompleteTextView
-     * para mostrar provincias y municipios.
+     * Adapters utilizados por los AutoCompleteTextView:
      */
     private ArrayAdapter<String> adapterProv;
     private ArrayAdapter<String> adapterMunA;
@@ -95,27 +92,26 @@ public class ComparativaActivity extends AppCompatActivity {
     // -----------------------------
 
     /**
-     * URL base de la API GeoAPI utilizada para realizar las peticiones.
+     * URL base de GeoAPI.
      */
     private static final String BASE = "https://apiv1.geoapi.es";
 
     /**
-     * Clave de autenticación necesaria para acceder a GeoAPI.
+     * Clave de autenticación necesaria para GeoAPI.
      */
-    private static final String KEY ="1fc368b23d25818cdd878134ec20df90e9e67a7a38481c4e395d0a6d56f99abc";
+    private static final String KEY = "1fc368b23d25818cdd878134ec20df90e9e67a7a38481c4e395d0a6d56f99abc";
 
     /**
-     * Parámetros comunes a todas las peticiones:
+     * Parámetros para realizar las peticiones
      */
-    private static final String COMMON_PARAMS ="FORMAT=json&PAGE_SIZE=1000&KEY=" + KEY;
+    private static final String COMMON_PARAMS = "FORMAT=json&PAGE_SIZE=1000&KEY=" + KEY;
 
     // -----------------------------
     // 7) OTROS
     // -----------------------------
 
     /**
-     * Variables auxiliares utilizadas para evitar recargar municipios
-     * si el texto de la provincia no ha cambiado.
+     * Variables auxiliares para evitar recargar municipios
      */
     private String ultimaProvA = "";
     private String ultimaProvB = "";
@@ -124,27 +120,29 @@ public class ComparativaActivity extends AppCompatActivity {
 
     /**
      * Método principal de inicialización de la Activity.
-    */
+     * Inicializa la interfaz, configura autocompletados y carga provincias.
+     *
+     * @param savedInstanceState Estado previamente guardado de la Activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comparativa);
 
-        // Inicialización de la cola de peticiones de Volley
+        // Inicializa la cola de peticiones de Volley
         queue = Volley.newRequestQueue(this);
 
-        // Enlazado con los elementos definidos en el layout XML
+        // Se enlaza con los elementos definidos en el layout
         spProvA = findViewById(R.id.autoCompleteTextView);
         spMunA  = findViewById(R.id.autoCompleteTextView3);
         spProvB = findViewById(R.id.autoCompleteTextView2);
         spMunB  = findViewById(R.id.autoCompleteTextView4);
 
-        //Botón volver
+        // Botón volver
+        Button btnVolver = findViewById(R.id.btnVolvercom);
 
-        Button btnVolver=findViewById(R.id.btnVolvercom);
-        //Botón buscar
+        // Botón buscar
         Button btnBuscar = findViewById(R.id.btnBuscar);
-
 
         // El autocompletado se activa a partir de una letra
         spProvA.setThreshold(1);
@@ -176,17 +174,17 @@ public class ComparativaActivity extends AppCompatActivity {
         );
         spMunB.setAdapter(adapterMunB);
 
-        // Configuración del autocompletado
+        // Se configura el autocompletado para  mostrar desplegable al enfocar/click/escribir
         autoShowDropdown(spProvA);
         autoShowDropdown(spProvB);
         autoShowDropdown(spMunA);
         autoShowDropdown(spMunB);
 
-        // Vincula provincias con municipios aunque no se pulse una sugerencia
+        // Se vincula  provincias con municipios
         vincularProvinciaConMunicipios(spProvA, spMunA, true);
         vincularProvinciaConMunicipios(spProvB, spMunB, false);
 
-        // Carga los municipios al seleccionar una provincia del desplegable
+        // Y se cargan los municipios al seleccionar provincia desde el desplegable
         spProvA.setOnItemClickListener((parent, view, position, id) -> {
             String provSeleccionada = spProvA.getText().toString().trim();
             cargarMunicipiosSiProvinciaValida(provSeleccionada, true);
@@ -197,20 +195,20 @@ public class ComparativaActivity extends AppCompatActivity {
             cargarMunicipiosSiProvinciaValida(provSeleccionada, false);
         });
 
-        //BOTÓN VOLVER
+        // BOTÓN VOLVER
         btnVolver.setOnClickListener(v -> finish());
 
+        // BOTÓN BUSCAR
         btnBuscar.setOnClickListener(v -> buscarComparativa());
 
-        // Carga inicial de provincias al abrir la pantalla
+        // Carga inicial de provincias
         cargarProvincias();
     }
 
     /**
-     * Configura un AutoCompleteTextView para que muestre el desplegable
-     * automáticamente al obtener foco, hacer click o escribir.
+     * Método que configura un AutoCompleteTextView para que muestre el desplegable automáticamente
      *
-     * @param actv campo de autocompletado
+     * @param actv Campo de autocompletado a configurar
      */
     private void autoShowDropdown(AutoCompleteTextView actv) {
         actv.setOnFocusChangeListener((v, hasFocus) -> {
@@ -231,16 +229,13 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
     /**
-     * Vincula el campo de provincia con su correspondiente campo de municipios.
-     * Cuando el texto coincide exactamente con una provincia ,
-     * se cargan automáticamente sus municipios.
+     * Método que vincula el campo de provincia con su correspondiente campo de municipios.
      *
-     * @param prov campo de provincia
-     * @param mun campo de municipio asociado
-     * @param esPuntoA indica si se trata del punto A o del punto B
+     * @param prov Campo de provincia
+     * @param mun Campo de municipio asociado
+     * @param esPuntoA True si corresponde al Punto A, false si corresponde al Punto B
      */
-    private void vincularProvinciaConMunicipios(AutoCompleteTextView prov,AutoCompleteTextView mun,boolean esPuntoA) {
-
+    private void vincularProvinciaConMunicipios(AutoCompleteTextView prov, AutoCompleteTextView mun, boolean esPuntoA) {
         prov.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
@@ -270,9 +265,9 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
     /**
-     * Limpia la lista de municipios del punto indicado.
+     * Método que limpia la lista de municipios del punto indicado y actualiza su adapter.
      *
-     * @param esPuntoA true si corresponde al punto A, false para el punto B
+     * @param esPuntoA True si corresponde al Punto A, false si corresponde al Punto B
      */
     private void limpiarMunicipios(boolean esPuntoA) {
         if (esPuntoA) {
@@ -285,11 +280,11 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
     /**
-     * Comprueba si la provincia existe en el mapa y, en ese caso,
+     * Método que comprueba si la provincia existe en el mapa y, en ese caso,
      * obtiene su código y carga los municipios correspondientes.
      *
-     * @param nombreProvincia nombre de la provincia
-     * @param esPuntoA indica si se trata del punto A o del punto B
+     * @param nombreProvincia Nombre de la provincia
+     * @param esPuntoA True si corresponde al Punto A, false si corresponde al Punto B
      */
     private void cargarMunicipiosSiProvinciaValida(String nombreProvincia, boolean esPuntoA) {
         String cpro = provinciaNombreToCpro.get(nombreProvincia);
@@ -297,7 +292,7 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
     /**
-     * Realiza una petición a GeoAPI para obtener la lista de provincias
+     * Método que realiza una petición a GeoAPI para obtener la lista de provincias
      * y preparar los datos necesarios para el autocompletado.
      */
     private void cargarProvincias() {
@@ -338,11 +333,10 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
     /**
-     * Realiza una petición a GeoAPI para obtener los municipios de una provincia
-     * concreta a partir de su código (CPRO).
+     * Método que realiza una petición a GeoAPI para obtener los municipios de una provincia
      *
-     * @param cpro código de la provincia
-     * @param esPuntoA indica si los datos son para el punto A o B
+     * @param cpro Código de la provincia
+     * @param esPuntoA True si los datos son para el Punto A, false para el Punto B
      */
     private void cargarMunicipios(String cpro, boolean esPuntoA) {
         List<String> destino = esPuntoA ? municipiosA : municipiosB;
@@ -379,16 +373,25 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
     /**
-     * El texto se mostrará con la primera letra en mayúscula
+     * Método que convierte un texto para mostrarlo con la primera letra en mayúscula.
      *
-     * @param s texto original
-     * @return texto capitalizado
+     * @param s Texto original
+     * @return Texto con capitalización básica (Primera letra mayúscula y resto minúsculas)
      */
     private String Mayuscula(String s) {
         if (s == null || s.isEmpty()) return "";
         s = s.toLowerCase().trim();
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
+
+    /**
+     * Método que obtiene coordenadas  a partir de municipio y provincia usando Geocoder.
+     *
+     * @param municipio Nombre del municipio
+     * @param provincia Nombre de la provincia
+     * @param onOk Callback si se obtienen coordenadas (lat, lon)
+     * @param onFail Callback si falla la búsqueda de coordenadas
+     */
     private void geocodeMunicipio(String municipio, String provincia,
                                   java.util.function.BiConsumer<Double, Double> onOk,
                                   Runnable onFail) {
@@ -414,6 +417,13 @@ public class ComparativaActivity extends AppCompatActivity {
         }).start();
     }
 
+    /**
+     * Método que construye la URL de consulta a Open-Meteo para obtener previsión de hoy
+     *
+     * @param lat Latitud
+     * @param lon Longitud
+     * @return URL completa lista para la petición GET
+     */
     private String buildOpenMeteoUrl(double lat, double lon) {
         return "https://api.open-meteo.com/v1/forecast"
                 + "?latitude=" + lat
@@ -422,6 +432,14 @@ public class ComparativaActivity extends AppCompatActivity {
                 + "&forecast_days=3"
                 + "&timezone=auto";
     }
+
+    /**
+     * Método que ejecuta el flujo completo de búsqueda:
+     * 1) Valida selecciones
+     * 2) Geocodifica A y B para obtener las coordenadas
+     * 3) Consulta el tiempo en Open-Meteo para ambos puntos
+     * 4) Abre ResultadosActivity con los datos en JSON
+     */
     private void buscarComparativa() {
 
         String provA = spProvA.getText().toString().trim();
@@ -429,7 +447,7 @@ public class ComparativaActivity extends AppCompatActivity {
         String provB = spProvB.getText().toString().trim();
         String munB  = spMunB.getText().toString().trim();
 
-        // 1) Validaciones
+        // 1) Se realizan las validaciones
         if (!validarSeleccion(provA, munA, true)) return;
         if (!validarSeleccion(provB, munB, false)) return;
 
@@ -447,13 +465,25 @@ public class ComparativaActivity extends AppCompatActivity {
             // 3) Geocoding B
             geocodeMunicipio(munB, provB, (latB, lonB) -> {
 
-                // 4) Cargar tiempo real A y B y abrir resultados cuando esté todo
+                // 4) y por último se carga el  tiempo de  A y B
                 cargarTiempoDosPuntos(latA, lonA, latB, lonB, puntoA, puntoB, fechaInicio);
 
             }, () -> Toast.makeText(this, "No se han encontrado coordenadas para Punto B", Toast.LENGTH_LONG).show());
 
         }, () -> Toast.makeText(this, "No se han encontrado coordenadas para Punto A", Toast.LENGTH_LONG).show());
     }
+
+    /**
+     * Método que  Valida que:
+     * - La provincia seleccionada exista en el mapa de provincias
+     * - El municipio exista dentro de la lista de municipios cargada para ese punto
+     *
+     *
+     * @param prov Provincia introducida
+     * @param mun Municipio introducido
+     * @param esPuntoA True si corresponde al Punto A, false si corresponde al Punto B
+     * @return True si la selección es válida, false en caso contrario
+     */
     private boolean validarSeleccion(String prov, String mun, boolean esPuntoA) {
 
         if (!provinciaNombreToCpro.containsKey(prov)) {
@@ -489,6 +519,18 @@ public class ComparativaActivity extends AppCompatActivity {
 
         return true;
     }
+
+    /**
+     * Método que realiza dos peticiones a Open-Meteo por cada punto
+     *
+     * @param latA Latitud del Punto A
+     * @param lonA Longitud del Punto A
+     * @param latB Latitud del Punto B
+     * @param lonB Longitud del Punto B
+     * @param puntoA Texto descriptivo del Punto A
+     * @param puntoB Texto descriptivo del Punto B
+     * @param fechaInicio Fecha de inicio de la consulta
+     */
     private void cargarTiempoDosPuntos(double latA, double lonA, double latB, double lonB,
                                        String puntoA, String puntoB, String fechaInicio) {
 
@@ -511,6 +553,19 @@ public class ComparativaActivity extends AppCompatActivity {
                 err -> Toast.makeText(this, "Error tiempo Punto B", Toast.LENGTH_LONG).show()
         );
     }
+
+    /**
+     * Abre ResultadosActivity enviando por Intent:
+     * - nombres de los puntos
+     * - fecha de consulta
+     * - respuestas JSON de Open-Meteo en formato String
+     *
+     * @param puntoA Texto descriptivo del Punto A
+     * @param puntoB Texto descriptivo del Punto B
+     * @param fechaInicio Fecha de inicio (dd/MM/yyyy)
+     * @param jsonA Respuesta JSON del Punto A
+     * @param jsonB Respuesta JSON del Punto B
+     */
     private void abrirResultados(String puntoA, String puntoB, String fechaInicio,
                                  org.json.JSONObject jsonA, org.json.JSONObject jsonB) {
 
@@ -523,7 +578,15 @@ public class ComparativaActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-   private void cargarTiempoOpenMeteo(double lat, double lon,
+    /**
+     * Método que realiza una petición GET a Open-Meteo para obtener la previsión meteorológica
+     *
+     * @param lat Latitud del punto
+     * @param lon Longitud del punto
+     * @param ok Callback si la respuesta es correcta
+     * @param fail Callback si ocurre un error
+     */
+    private void cargarTiempoOpenMeteo(double lat, double lon,
                                        com.android.volley.Response.Listener<org.json.JSONObject> ok,
                                        com.android.volley.Response.ErrorListener fail) {
 
@@ -540,5 +603,4 @@ public class ComparativaActivity extends AppCompatActivity {
 
         queue.add(req);
     }
-
 }
