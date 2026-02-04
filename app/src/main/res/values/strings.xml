@@ -52,6 +52,9 @@
     <string name="autocompletem">Escriba el municipio</string>
     <string name="look_button">BUSCAR</string>
     <string name="back_button" >VOLVER</string>
+    <string name="btneliminar">Eliminar</string>
+    <string name="btonvolver">Volver</string>
+    <string name="titulohistorial">HISTORIAL</string>
 
 
 </resources>

@@ -27,7 +27,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="casual"
         android:gravity="center"
-        android:text="HISTORIAL"
+        android:text="@string/titulohistorial"
         android:textColor="@color/boton"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -75,8 +75,21 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Volver"
+                android:text="@string/btonvolver"
                 android:backgroundTint="@color/boton"/>
+
+            <!-- Botón Eliminar -->
+
+            <Button
+                android:id="@+id/btnEliminarHistorial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/btneliminar"
+                android:backgroundTint="@color/boton"/>
+
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
