@@ -55,6 +55,19 @@
     <string name="btneliminar">Eliminar</string>
     <string name="btonvolver">Volver</string>
     <string name="titulohistorial">HISTORIAL</string>
+    <string name="detalle_app">Detalle App</string>
+    <string name="dia">DÍA</string>
+    <string name="hora">HORA</string>
+    <string name="usuario">USUARIO</string>
+    <string name="error">ERROR</string>
+    <string name="guardar">Guardar</string>
+    <string name="salir">Salir</string>
+    <string name="lluvia">Lluvia</string>
+    <string name="cielo">Cielo</string>
+    <string name="viento">Viento</string>
+    <string name="mostrar_ocultar">Mostrar_Ocultar</string>
+    <string name="unidad_temperatura">Unidad temperatura</string>
+    <string name="ajustes">Ajustes</string>
 
 
 </resources>

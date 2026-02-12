@@ -52,13 +52,23 @@ public class HistorialActivity extends AppCompatActivity {
 
         // 1) UID del usuario actual (Firebase)
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = (user != null) ? user.getUid() : "guest";
-
+        if (user == null) {
+            RegistroConexiones.error("desconocido", "SEGURIDAD", "HistorialActivity abierta sin sesión (user=null)");
+            finish();
+            return;
+        }
+        uid = user.getUid();
         // 2) Enlazo componentes del layout
         listHistorial = findViewById(R.id.listHistorial);
         btnVolver = findViewById(R.id.btnVolverHistorial);
         btnEliminarHistorial = findViewById(R.id.btnEliminarHistorial);
+        if (listHistorial == null || btnVolver == null || btnEliminarHistorial == null) {
 
+            RegistroConexiones.error(emailActual(), "UI",
+                    "HistorialActivity: algún componente es null (revisa IDs en activity_historial.xml)");
+            finish();
+            return;
+        }
         // 3) Adapter del ListView
         adapter = new ArrayAdapter<>(
                 this,
@@ -126,6 +136,11 @@ public class HistorialActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    private String emailActual() {
+        FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+        return (u != null && u.getEmail() != null) ? u.getEmail() : "desconocido";
+    }
+
     /**
      * Método que muestra un diálogo de confirmación antes de borrar todo el historial.
      */
@@ -134,11 +149,23 @@ public class HistorialActivity extends AppCompatActivity {
                 .setTitle("Eliminar historial")
                 .setMessage("¿Seguro que quieres borrar todo tu historial?")
                 .setPositiveButton("Sí, borrar", (dialog, which) -> {
-                    HistorialStorage.clear(this, uid);
-                    cargarHistorial();
-                    Toast.makeText(this, "Historial eliminado", Toast.LENGTH_SHORT).show();
+                    try {
+                        HistorialStorage.clear(this, uid);
+
+                        // (Opcional) Registrar borrado correcto
+                        RegistroConexiones.ok(emailActual(), "HISTORIAL");
+
+                        cargarHistorial();
+                        Toast.makeText(this, "Historial eliminado", Toast.LENGTH_SHORT).show();
+
+                    } catch (Exception e) {
+                        // Registrar fallo real
+                        String msg = (e.getMessage() != null) ? e.getMessage() : "Error borrando historial (Storage)";
+                        RegistroConexiones.error(emailActual(), "STORAGE", "Error borrando historial: " + msg);
+
+                        Toast.makeText(this, "No se pudo borrar el historial", Toast.LENGTH_LONG).show();
+                    }
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
-    }
-}
+    }}

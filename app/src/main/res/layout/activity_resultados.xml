@@ -6,6 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
+    <!-- Cargando ajustes (overlay) -->
+    <ProgressBar
+        android:id="@+id/pbAjustes"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- ===================== -->
     <!-- SECCIÓN: Fondo        -->

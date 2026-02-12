@@ -29,11 +29,16 @@
         <activity
             android:name=".HistorialActivity"
             android:exported="false" />
+        <activity android:name=".AppActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AjustesActivity"
+            android:exported="false" />
 
 
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" /> <!-- PANTALLA INICIAL -->
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
