@@ -7,25 +7,19 @@ package com.romerofernandez.meteoduo;
  */
 public class HistorialItem {
 
-    /** Texto  del Punto A  */
+   //Texto  del Punto A y B
     public String puntoA;
-
-    /** Texto  del Punto B  */
     public String puntoB;
 
-    /** Fecha en la que se realizó la consulta  */
+   //Fecha en la que se realizó la consulta
     public String fecha;
 
-    /** Respuesta JSON completa de Open-Meteo para el Punto A */
+    // Respuesta JSON completa de Open-Meteo para el Punto A y B
     public String jsonA;
-
-    /** Respuesta JSON completa de Open-Meteo para el Punto B */
     public String jsonB;
 
     /**
      * Constructor de la clase HistorialItem.
-     *
-     * Inicia una entrada del historial con todos los datos
      *
      * @param puntoA Texto del Punto A (municipio y provincia)
      * @param puntoB Texto del Punto B (municipio y provincia)

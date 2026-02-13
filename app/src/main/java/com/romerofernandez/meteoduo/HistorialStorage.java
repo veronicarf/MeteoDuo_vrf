@@ -12,14 +12,12 @@ import java.util.List;
  */
 public class HistorialStorage {
 
-    /**
-     * Nombre del fichero  donde se almacena el historial.
-     */
-    private static final String PREFS = "historial_prefs";
 
-    /**
-     * Prefijo de la clave utilizada en SharedPreferences.
-     */
+    //Nombre del fichero  donde se almacena el historial.
+       private static final String PREFS = "historial_prefs";
+
+
+     // Prefijo de la clave utilizada en SharedPreferences.
     private static final String KEY_PREFIX = "historial_json_"; // + uid
 
     /**

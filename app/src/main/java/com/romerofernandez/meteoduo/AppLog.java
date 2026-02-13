@@ -1,23 +1,54 @@
 package com.romerofernandez.meteoduo;
 
+/**
+ * Clase AppLog para guardar datos de los errores obtenidos
+ */
 public class AppLog {
-    public String id;
-    public String dia;
-    public String hora;
-    public String usuario;
-    public String tipo;         // LOGIN, GEOAPI, GEOCODER, OPEN_METEO, FIRESTORE...
-    public String detalleError; // vacío => correcto
 
+    // Identificador único del documento en Firestore
+    public String id;
+
+    //Día del evento
+    public String dia;
+
+    //Hora del evento
+    public String hora;
+
+    // Usuario asociado al evento
+    public String usuario;
+
+    // Tipo de evento.
+    public String tipo;
+
+     //Detalle del error.
+    public String detalleError;
+
+    /**
+     * Constructor de la clase AppLog.
+     *
+     * @param id identificador del documento en Firestore
+     * @param dia día en el que ocurrió el evento
+     * @param hora hora en la que ocurrió el evento
+     * @param usuario usuario asociado al evento
+     * @param tipo tipo de evento registrado
+     * @param detalleError mensaje de error (vacío si no hubo error)
+     */
     public AppLog(String id, String dia, String hora, String usuario, String tipo, String detalleError) {
-        this.id = id;
-        this.dia = dia;
-        this.hora = hora;
-        this.usuario = usuario;
-        this.tipo = tipo;
-        this.detalleError = detalleError;
+        this.id = id;                   // Asigna el id del documento
+        this.dia = dia;                 // Asigna el día del evento
+        this.hora = hora;               // Asigna la hora del evento
+        this.usuario = usuario;         // Asigna el usuario
+        this.tipo = tipo;               // Asigna el tipo de evento
+        this.detalleError = detalleError; // Asigna el detalle del error (si existe)
     }
 
+    /**
+     * Método que indica si el registro representa un error.
+     *
+     * @return true si hay un mensaje de error, false si el evento es correcto
+     */
     public boolean esError() {
+        // Devuelve true si detalleError no es null y no está vacío
         return detalleError != null && !detalleError.trim().isEmpty();
     }
 }

@@ -14,71 +14,60 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * RegisterActivity
- *
  * Activity encargada del registro de nuevos usuarios en la aplicación.
- * Utiliza Firebase Authentication para crear la cuenta y Firebase Firestore
- * para almacenar los datos adicionales del usuario (correo, rol y estado).
  *
  * @author Verónica
  */
 public class RegisterActivity extends AppCompatActivity {
 
-    /**
-     * Campo de texto para introducir el correo electrónico.
-     */
+    // Campo de texto para introducir el correo electrónico y contraseña
     private EditText etEmail;
-
-    /**
-     * Campo de texto para introducir la contraseña.
-     */
     private EditText etPass1;
-
-    /**
-     * Campo de texto para repetir la contraseña.
-     */
     private EditText etPass2;
 
-    /**
-     * Instancia de FirebaseAuth para crear cuentas de usuario.
-     */
+    // Instancia de FirebaseAuth para crear cuentas de usuario y guardarlos
     private FirebaseAuth auth;
-
-    /**
-     * Instancia de FirebaseFirestore para guardar los datos del usuario.
-     */
     private FirebaseFirestore db;
 
     /**
-     * Método que se ejecuta al crear la Activity.
-     * Inicializa Firebase, enlaza los componentes del layout
-     * y configura los eventos de los botones.
+     * Método de inicialización de la Activity.
+     * Se ejecuta cuando la pantalla es creada por primera vez.
      *
-     * @param savedInstanceState Estado previamente guardado de la Activity
+     * @param savedInstanceState estado previo de la Activity si existiera
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Se inicializa de Firebase
+        inicializarFirebase();
+        enlazarVistas();
+        configurarEventos();
+    }
+
+    /** Inicializa los servicios de Firebase usados en el registro. */
+    private void inicializarFirebase() {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+    }
 
-        // Se enlazan los componentes del layout
+    /** Enlaza los campos de entrada del formulario de registro. */
+    private void enlazarVistas() {
         etEmail = findViewById(R.id.etEmailReg);
         etPass1 = findViewById(R.id.etPasswordReg);
         etPass2 = findViewById(R.id.etPasswordReg2);
-
-        Button btnCrear = findViewById(R.id.btnCrearCuenta);
-        TextView tvVolver = findViewById(R.id.tvVolverLogin);
-
-        // Para volver a la pantalla de login
-        tvVolver.setOnClickListener(v -> finish());
-
-        // Para crear una nueva cuenta
-        btnCrear.setOnClickListener(v -> crearCuenta());
     }
+
+    /** Configura los listeners de los botones de la pantalla de registro. */
+    private void configurarEventos() {
+
+        findViewById(R.id.tvVolverLogin)
+                .setOnClickListener(v -> finish());
+
+        findViewById(R.id.btnCrearCuenta)
+                .setOnClickListener(v -> crearCuenta());
+    }
+
 
     /**
      * Método para crear una nueva cuenta de usuario utilizando Firebase Authentication.

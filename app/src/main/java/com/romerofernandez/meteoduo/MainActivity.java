@@ -1,7 +1,6 @@
 package com.romerofernandez.meteoduo;
 
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -18,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Método que se ejecuta al crear la Activity.
-     * Configura el modo Edge-to-Edge y aplica los márgenes adecuados
-     * para evitar que el contenido quede oculto por las barras del sistema.
      *
      * @param savedInstanceState Estado previamente guardado de la Activity
      */
