@@ -1,5 +1,6 @@
 package com.romerofernandez.meteoduo;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,6 +8,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +29,7 @@ public class ActivityUsuario extends AppCompatActivity {
     private ImageButton btnMenu;
     private Button btnConsultar;
     private Button btnHistorial;
+    private ImageButton btnApagar;
 
     // Variables  Firebase
 
@@ -81,10 +85,10 @@ public class ActivityUsuario extends AppCompatActivity {
     private void initViews() {
         imgAvatar = findViewById(R.id.imgAvatar);
         tvNombreUsuario = findViewById(R.id.tvNombreUsuario);
-
         btnMenu = findViewById(R.id.btnMenu);
         btnConsultar = findViewById(R.id.btnConsultar);
         btnHistorial = findViewById(R.id.btnHistorial);
+        btnApagar = findViewById(R.id.btnclose);
     }
 
     /**
@@ -106,6 +110,35 @@ public class ActivityUsuario extends AppCompatActivity {
         btnHistorial.setOnClickListener(v ->
                 startActivity(new Intent(ActivityUsuario.this, HistorialActivity.class))
         );
+
+        //Cerrar sesión
+        btnApagar.setOnClickListener(v -> mostrarConfirmacionCerrarSesion());
+
+    }
+
+    /**
+     * Muestra un diálogo de confirmación antes de cerrar sesión.
+     */
+    private void mostrarConfirmacionCerrarSesion() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Cerrar sesión")
+                .setMessage("¿Deseas cerrar la sesión?")
+                .setPositiveButton("Sí", (dialog, which) -> cerrarSesion())
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
+    /**
+     * Cierra la sesión del usuario y vuelve a la pantalla de login.
+     */
+    private void cerrarSesion() {
+        auth.signOut();
+
+        Intent i = new Intent(ActivityUsuario.this, LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        finish();
     }
 
     /**

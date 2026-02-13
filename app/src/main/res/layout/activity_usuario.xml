@@ -24,6 +24,20 @@
     <!-- ============================== -->
     <!-- SECCIÓN: Menú (arriba izquierda) -->
     <!-- ============================== -->
+
+    <ImageButton
+        android:id="@+id/btnclose"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="324dp"
+        android:layout_marginTop="52dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/setting"
+        android:scaleType="centerInside"
+        android:src="@drawable/apagar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageButton
         android:id="@+id/btnMenu"
         android:layout_width="63dp"

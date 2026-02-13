@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +32,8 @@ public class ActivityAdministrador extends AppCompatActivity {
     private Button btnConsultar;
     private Button btnHistorial;
     private Button btnApp;
+    private ImageButton btnApagar;
+
 
     // Variables  Firebase
     private FirebaseFirestore db;
@@ -84,6 +87,7 @@ public class ActivityAdministrador extends AppCompatActivity {
         btnConsultar = findViewById(R.id.btnConsultar);
         btnHistorial = findViewById(R.id.btnHistorial);
         btnApp = findViewById(R.id.btnApp);
+        btnApagar = findViewById(R.id.btnclose2);
     }
 
 
@@ -111,6 +115,36 @@ public class ActivityAdministrador extends AppCompatActivity {
         btnApp.setOnClickListener(v ->
                 startActivity(new Intent(ActivityAdministrador.this, AppActivity.class))
         );
+
+        //Apagar
+        btnApagar.setOnClickListener(v -> mostrarConfirmacionCerrarSesion());
+
+    }
+
+    /**
+     * Muestra un diálogo de confirmación antes de cerrar sesión.
+     */
+    private void mostrarConfirmacionCerrarSesion() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Cerrar sesión")
+                .setMessage("¿Deseas cerrar la sesión?")
+                .setPositiveButton("Sí", (dialog, which) -> cerrarSesion())
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
+
+    /**
+     * Cierra la sesión del usuario y vuelve a la pantalla de login.
+     */
+    private void cerrarSesion() {
+        auth.signOut();
+
+        Intent i = new Intent(ActivityAdministrador.this, LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        finish();
     }
 
 

@@ -67,8 +67,8 @@ public class ComparativaActivity extends AppCompatActivity {
 
     // URL base de GEOAPI  y Clave de acceso a GEOAPI
     private static final String BASE = "https://apiv1.geoapi.es";
-    private static final String KEY = "1fc368b23d25818cdd878134ec20df90e9e67a7a38481c4e395d0a6d56f99abc";
-
+    private static final String KEY = "";
+//1fc368b23d25818cdd878134ec20df90e9e67a7a38481c4e395d0a6d56f99abc
    //Parámetros comunes para las peticiones
     private static final String COMMON_PARAMS = "FORMAT=json&PAGE_SIZE=1000&KEY=" + KEY;
 

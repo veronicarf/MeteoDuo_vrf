@@ -30,6 +30,19 @@
     <!-- CUENTA ADMINISTRADOR -->
     <!-- ============================== -->
 
+    <ImageButton
+        android:id="@+id/btnclose2"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="140dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/setting"
+        android:scaleType="centerInside"
+        android:src="@drawable/apagar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
