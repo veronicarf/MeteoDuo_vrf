@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Fondo -->
+    <!-- ============================== -->
+    <!--Imagen de fondo-->
+    <!-- ============================== -->
     <ImageView
         android:id="@+id/bgAjustes"
         android:layout_width="0dp"
@@ -18,7 +20,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Panel -->
+    <!-- ============================== -->
+    <!--PANEL-->
+    <!-- ============================== -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/panelAjustes"
         android:layout_width="0dp"

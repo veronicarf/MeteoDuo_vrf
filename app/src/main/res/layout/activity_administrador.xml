@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <!-- ===================== -->
-    <!-- SECCIÓN: Fondo        -->
+    <!-- Imagen fondo de pantalla-->
     <!-- ===================== -->
     <ImageView
         android:id="@+id/bg"
@@ -27,7 +27,7 @@
 
 
     <!-- ============================== -->
-    <!-- CUENTA ADMINISTRADOR -->
+    <!--Botón apagar-->
     <!-- ============================== -->
 
     <ImageButton
@@ -43,6 +43,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- ============================== -->
+    <!--Texto cuenta admisnitrador-->
+    <!-- ============================== -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
@@ -60,7 +63,7 @@
         app:layout_constraintStart_toEndOf="@+id/btnMenu" />
 
     <!-- ============================== -->
-    <!-- SECCIÓN: Menú (arriba izquierda) -->
+    <!-- Botón ajustes  -->
     <!-- ============================== -->
     <ImageButton
         android:id="@+id/btnMenu"

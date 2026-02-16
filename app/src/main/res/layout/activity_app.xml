@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Fondo -->
+    <!-- ============================== -->
+    <!--FONDO DE PANTALLA-->
+    <!-- ============================== -->
     <ImageView
         android:id="@+id/bgapp"
         android:layout_width="0dp"
@@ -19,7 +21,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Título -->
+    <!-- ============================== -->
+    <!--TITULO-->
+    <!-- ============================== -->
     <TextView
         android:id="@+id/tvTituloapp"
         android:layout_width="0dp"
@@ -34,7 +38,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Cabecera tabla -->
+    <!-- ============================== -->
+    <!--CABECERA TABLA->
+    <!- ============================== -->
     <LinearLayout
         android:id="@+id/headerTabla"
         android:layout_width="0dp"
@@ -82,7 +88,9 @@
             android:textColor="@color/text"/>
     </LinearLayout>
 
-    <!-- Contenedor botones abajo -->
+    <!-- ============================== -->
+    <!--CONTENEDOR BOTONES VOLVER Y ELIMINAR-->
+    <!-- ============================== -->
     <LinearLayout
         android:id="@+id/llBotones"
         android:layout_width="0dp"
@@ -112,7 +120,9 @@
             android:text="@string/btneliminar"/>
     </LinearLayout>
 
-    <!-- Listado -->
+    <!-- ============================== -->
+    <!--LISTADO-->
+    <!-- ============================== -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvApp"
         android:layout_width="0dp"
