@@ -1,76 +1,43 @@
-🌦️ MeteoDuo
-Aplicación Android de Gestión y Comparativa Meteorológica
-📌 Descripción del Proyecto
+🌤️ MeteoDuo
 
-MeteoDuo es una aplicación móvil desarrollada en Android Studio que permite consultar, comparar y almacenar información meteorológica de diferentes ubicaciones.
+MeteoDuo es una app Android hecha en Java que permite consultar el tiempo, comparar previsiones entre varios días y gestionar usuarios con Firebase.
 
-La aplicación integra autenticación de usuarios mediante Firebase Authentication, almacenamiento en la nube mediante Cloud Firestore y consumo de datos meteorológicos externos mediante Volley (API REST).
+Es un proyecto desarrollado para clase, donde he trabajado autenticación, consumo de APIs, base de datos en la nube y documentación técnica.
 
-El sistema distingue entre dos roles de usuario:
+🚀 ¿Qué hace la app?
 
-👤 Usuario
+Con MeteoDuo puedes:
 
-👨‍💼 Administrador
+🔐 Registrarte e iniciar sesión
 
-Cada rol dispone de funcionalidades específicas dentro de la aplicación.
+👤 Tener perfil con avatar personalizable
 
-🎯 Objetivos del Proyecto
+🌍 Consultar el tiempo de distintas ubicaciones
 
-Implementar autenticación segura de usuarios.
+📊 Comparar varios días de previsión
 
-Gestionar roles diferenciados (usuario/administrador).
+🕒 Guardar consultas en un historial
 
-Consumir servicios web meteorológicos mediante API REST.
+⚙️ Ajustar preferencias (unidad de temperatura, datos visibles, etc.)
 
-Almacenar datos en la nube usando Firebase.
+👨‍💼 Diferenciar entre usuario y administrador
 
-Aplicar buenas prácticas de desarrollo Android.
+🛠️ Tecnologías usadas
 
-Generar documentación técnica mediante Javadoc.
+Java
 
-Versionar el proyecto mediante Git y GitHub.
+Android Studio
 
-🛠️ Tecnologías Utilizadas
-Tecnología	Descripción
-Java 11	Lenguaje principal de desarrollo
-Android Studio	Entorno de desarrollo
-Firebase Authentication	Gestión de usuarios
-Firebase Firestore	Base de datos en la nube
-Volley	Consumo de API REST
-AndroidX	Librerías modernas Android
-Gradle	Sistema de construcción
-Git / GitHub	Control de versiones
-🧩 Funcionalidades Principales
-🔐 Sistema de Autenticación
+Firebase Authentication
 
-Registro de nuevos usuarios.
+Firebase Firestore
 
-Inicio de sesión.
+Volley (para las peticiones a la API)
 
-Gestión de roles.
+Open-Meteo API
 
-Cierre de sesión.
+RecyclerView
 
-🌍 Comparativa Meteorológica
+Gradle
 
-Consulta meteorológica por localización.
-
-Comparativa de varios días.
-
-Visualización de temperatura, viento y estado del cielo.
-
-Configuración de unidades (°C / °F).
-
-⚙️ Ajustes Personalizados
-
-Cambio de avatar.
-
-Preferencias de visualización.
-
-Configuración guardada en Firebase.
-
-📜 Historial
-
-Registro de consultas realizadas.
-
-Posibilidad de eliminación del historial.
+Git y GitHub
