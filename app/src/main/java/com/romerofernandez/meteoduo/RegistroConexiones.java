@@ -11,6 +11,8 @@ import java.util.Map;
 
 /**
  * Clase utilitaria encargada de registrar eventos de la aplicación en Firestore.
+ *
+ *  @author Verónica Romero
  */
 public class RegistroConexiones {
 

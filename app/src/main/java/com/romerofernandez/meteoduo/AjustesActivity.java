@@ -34,26 +34,61 @@ import java.util.Map;
  * </ul>
  * Los ajustes se guardan y se cargan desde Firestore en la colección "ajustes"
  * usando el UID del usuario autenticado.
+ *
+ *  @author Verónica Romero
  */
 public class AjustesActivity extends AppCompatActivity {
 
-    // Variables UI
+    // ==============================
+   // VARIABLES DE INTERFAZ
+  // ==============================
+
+    /** Campo de texto donde el usuario puede modificar su nombre visible. */
     private EditText etNombreUsuario;
+
+    /** Grupo de selección para la unidad de temperatura. */
     private RadioGroup rgTemp;
+
+    /** Opciones individuales de unidad de temperatura (Celsius o Fahrenheit). */
     private RadioButton rbC, rbF;
+
+    /** CheckBoxes que determinan qué información meteorológica se visualizará. */
     private CheckBox cbViento, cbCielo, cbLluvia;
 
+    /** Vista previa del avatar seleccionado por el usuario. */
     private ImageView imgAvatarPreview;
-    private Button btnCambiarImagen, btnGuardar, btnSalir;
 
-    // Variables Firebase
+    /** Botón que abre el selector de imágenes de avatar. */
+    private Button btnCambiarImagen;
+
+    /** Botón que guarda los cambios realizados en los ajustes. */
+    private Button btnGuardar;
+
+    /** Botón para salir de la pantalla de ajustes. */
+    private Button btnSalir;
+
+
+    // ==============================
+   // VARIABLES DE FIREBASE
+  // ==============================
+
+    /** Instancia de FirebaseFirestore para gestionar la base de datos en la nube. */
     private FirebaseFirestore db;
+
+    /** Identificador único del usuario autenticado (UID). */
     private String uid;
 
 
-    // Variables para avatar y nombre
+   // ==============================
+  // VARIABLES DE ESTADO
+ // ==============================
+
+    /** Nombre del avatar seleccionado (valor por defecto: "avatar1"). */
     private String avatarSeleccionado = "avatar1";
+
+    /** Unidad de temperatura seleccionada por el usuario (C o F). */
     private String unidadTemp = "C";
+
 
     /**
      * Método de inicialización de la Activity.

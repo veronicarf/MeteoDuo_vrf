@@ -9,16 +9,23 @@ import java.util.List;
 
 /**
  * Clase  encargada de gestionar el almacenamiento del historial
+ *
+ *  @author Verónica Romero
  */
 public class HistorialStorage {
 
+// ==============================
+// CONFIGURACIÓN DE PERSISTENCIA
+// ==============================
 
-    //Nombre del fichero  donde se almacena el historial.
-       private static final String PREFS = "historial_prefs";
+    /** Nombre del fichero de SharedPreferences donde se almacena el historial. */
+    private static final String PREFS = "historial_prefs";
+
+    /** Prefijo de la clave utilizada en SharedPreferences para guardar el historial por usuario (se concatena con el UID). */
+    private static final String KEY_PREFIX = "historial_json_";
 
 
-     // Prefijo de la clave utilizada en SharedPreferences.
-    private static final String KEY_PREFIX = "historial_json_"; // + uid
+
 
     /**
      * Método que obtiene todas las consultas guardadas en el historial de un usuario.

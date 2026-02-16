@@ -1,14 +1,13 @@
 package com.romerofernandez.meteoduo;
 
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,22 +18,48 @@ import com.google.firebase.firestore.FirebaseFirestore;
  * Activity principal del usuario estándar.
   * Muestra el nombre y avatar del usuario autenticado
  * y permite navegar a Ajustes, Consultar y Historial.
+ *
+ * @author Verónica Romero
  */
 public class ActivityUsuario extends AppCompatActivity {
 
-    // Variables UI
+     // ==============================
+    // VARIABLES DE INTERFAZ
+   // ==============================
 
+    /** Imagen del avatar del usuario autenticado. */
     private ImageView imgAvatar;
+
+    /** Muestra el nombre del usuario actualmente autenticado.*/
     private TextView tvNombreUsuario;
+
+    /** Botón para abrir el menú de ajustes*/
     private ImageButton btnMenu;
+
+    /** Botón que permite realizar una consulta meteorológica.*/
     private Button btnConsultar;
+
+    /** Botón que redirige a la pantalla de historial de consultas.*/
     private Button btnHistorial;
+
+    /** Botón para cerrar sesión del usuario actual.*/
     private ImageButton btnApagar;
 
-    // Variables  Firebase
 
+    // ==============================
+   // VARIABLES DE FIREBASE
+  // ==============================
+
+    /** Instancia de FirebaseFirestore*/
     private FirebaseFirestore db;
+
+    /** Instancia de FirebaseAuth*/
     private FirebaseAuth auth;
+
+
+
+
+
 
     /**
      * Método de inicialización de la Activity.
@@ -57,6 +82,10 @@ public class ActivityUsuario extends AppCompatActivity {
 
         // Configura los botones y su navegación
         configurarBotones();
+
+        //En caso de nuevo usuario, llamará al metodo para mostrar tutorial
+        mostrarTutorialSiPrimeraVez();
+
     }
 
     /**
@@ -202,4 +231,30 @@ public class ActivityUsuario extends AppCompatActivity {
 
         return (resId != 0) ? resId : R.drawable.avatar_default;
     }
+
+
+
+    /**
+     * Método para mostrar tutorial incial a nuevos usuarios.
+     * */
+    private void mostrarTutorialSiPrimeraVez() {
+
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) return;
+
+        String uid = user.getUid();
+
+        SharedPreferences sp = getSharedPreferences("prefs", MODE_PRIVATE);
+
+        boolean yaVisto = sp.getBoolean("tutorial_" + uid, false);
+
+        if (!yaVisto) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(android.R.id.content, TutorialOverlayFragment.newInstance(), "TUTORIAL")
+                    .commit();
+        }
+    }
+
+
 }

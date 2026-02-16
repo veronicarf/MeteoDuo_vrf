@@ -11,22 +11,31 @@ import java.util.List;
 /**
   * Adapter del RecyclerView encargado de mostrar la lista de registros AppLog.
  * Conecta los datos (AppLog) con la interfaz (item_app_log.xml).
+ *
+ *  @author Verónica Romero
  */
 public class AppLogAdapter extends RecyclerView.Adapter<AppLogAdapter.VH> {
 
-
-
-    // Lista de registros que se mostrarán en el RecyclerView */
+   // ==============================
+  // ADAPTER Y DATOS
+ // ==============================
+    /** Lista de registros que se mostrarán en el RecyclerView. */
     private final List<AppLog> data;
 
-    //Listener que gestiona el clic sobre un elemento */
+    /** Listener que gestiona el clic sobre un elemento del RecyclerView. */
     private final OnItemClick listener;
 
-    // Interfaz para gestionar el clic sobre una fila del RecyclerView.
-
+    // ==============================
+   // INTERFAZ DE EVENTOS
+  // ==============================
+    /** Interfaz que define el comportamiento al pulsar una fila del RecyclerView. */
     public interface OnItemClick {
         void onClick(AppLog item);
     }
+
+
+
+
     /**
      * Constructor del adapter.
      *

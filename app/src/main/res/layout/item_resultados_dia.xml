@@ -39,7 +39,7 @@
                 android:layout_marginBottom="8dp"
                 android:fontFamily="casual"
                 android:gravity="center"
-                android:text="Resultados"
+                android:text="@string/resultados"
                 android:textColor="@color/boton"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -58,7 +58,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center"
-                    android:text="PUNTO A"
+                    android:text="@string/punto_a"
                     android:textColor="@color/boton"
                     android:textStyle="bold" />
 
@@ -76,7 +76,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center"
-                    android:text="PUNTO B"
+                    android:text="@string/punto_b"
                     android:textColor="@color/boton"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -103,7 +103,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center"
-                    android:text="Temp Max"
+                    android:text="@string/temp_max"
                     android:textColor="@color/text"
                     android:textStyle="bold" />
 
@@ -138,7 +138,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center"
-                    android:text="Temp Min"
+                    android:text="@string/temp_min"
                     android:textColor="@color/text"
                     android:textStyle="bold" />
 
@@ -173,7 +173,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center"
-                    android:text="Viento"
+                    android:text="@string/viento"
                     android:textColor="@color/text"
                     android:textStyle="bold" />
 
@@ -208,7 +208,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center"
-                    android:text="Precipitación"
+                    android:text="@string/precipitacion"
                     android:textColor="@color/text"
                     android:textStyle="bold" />
 
@@ -243,7 +243,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center"
-                    android:text="Cielo"
+                    android:text="@string/cielo"
                     android:textColor="@color/text"
                     android:textStyle="bold" />
 

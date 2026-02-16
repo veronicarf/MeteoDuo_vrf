@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tutorialRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Fondo oscuro -->
+    <View
+        android:id="@+id/dim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000" />
+
+    <!-- Contenedor del bocadillo  -->
+    <LinearLayout
+        android:id="@+id/bubble"
+        android:layout_width="wrap_content"
+        android:minWidth="260dp"
+        android:maxWidth="300dp"
+        android:layout_height="153dp"
+        android:layout_gravity="top|start"
+        android:background="@drawable/bg_bubble_oval"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- TEXTO -->
+        <TextView
+            android:id="@+id/tvMsg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/mensaje"
+            android:textColor="#000"
+            android:textSize="16sp" />
+
+        <!-- BOTÓN AIGUIENTE -->
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/siguiente" />
+
+    </LinearLayout>
+
+    <!-- FLECHA -->
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|start"
+        android:src="@drawable/ic_arrow_down"
+        android:visibility="visible" />
+
+
+
+</FrameLayout>

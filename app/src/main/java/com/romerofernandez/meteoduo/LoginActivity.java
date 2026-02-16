@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,15 +21,30 @@ import com.google.firebase.firestore.FirebaseFirestore;
  *   <li>Leer su rol (campo {@code rol}) y redirigir a la pantalla correspondiente.</li>
  * </ul>
  * Además registra intentos correctos y fallidos mediante {@code RegistroConexiones}.
+ *
+ *  @author Verónica Romero
  */
 public class LoginActivity extends AppCompatActivity {
 
-  //Variables UI
+// ==============================
+// COMPONENTES DE INTERFAZ
+// ==============================
+
+    /** Campo de texto para introducir el correo electrónico del usuario. */
     private EditText etEmail;
+
+    /** Campo de texto para introducir la contraseña del usuario. */
     private EditText etPassword;
 
-    // Variables) Firebase
+
+// ==============================
+//  FIREBASE
+// ==============================
+
+    /** Instancia de FirebaseAuth encargada de la autenticación . */
     private FirebaseAuth auth;
+
+    /** Instancia de FirebaseFirestore  */
     private FirebaseFirestore db;
 
 

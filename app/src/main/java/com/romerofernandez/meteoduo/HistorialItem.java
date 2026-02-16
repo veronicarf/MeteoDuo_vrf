@@ -4,18 +4,28 @@ package com.romerofernandez.meteoduo;
 
 /**
  * Clase  que representa una consulta guardada en el historial.
+ *
+ *  @author Verónica Romero
  */
 public class HistorialItem {
 
-   //Texto  del Punto A y B
+    // ==============================
+// DATOS DE LA CONSULTA
+// ==============================
+
+    /** Nombre del municipio seleccionado como Punto A en la comparativa. */
     public String puntoA;
+
+    /** Nombre del municipio seleccionado como Punto B en la comparativa. */
     public String puntoB;
 
-   //Fecha en la que se realizó la consulta
+    /** Fecha en la que se realizó la consulta comparativa. */
     public String fecha;
 
-    // Respuesta JSON completa de Open-Meteo para el Punto A y B
+    /** Respuesta JSON completa obtenida de Open-Meteo para el Punto A. */
     public String jsonA;
+
+    /** Respuesta JSON completa obtenida de Open-Meteo para el Punto B. */
     public String jsonB;
 
     /**

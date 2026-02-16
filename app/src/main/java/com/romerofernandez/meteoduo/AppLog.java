@@ -2,26 +2,29 @@ package com.romerofernandez.meteoduo;
 
 /**
  * Clase AppLog para guardar datos de los errores obtenidos
+ *
+ *  @author Verónica Romero
  */
 public class AppLog {
 
-    // Identificador único del documento en Firestore
+    /** Identificador único del documento almacenado en Firestore. */
     public String id;
 
-    //Día del evento
+    /** Día en el que se registró el evento. */
     public String dia;
 
-    //Hora del evento
+    /** Hora exacta en la que ocurrió el evento. */
     public String hora;
 
-    // Usuario asociado al evento
+    /** Usuario asociado al evento registrado. */
     public String usuario;
 
-    // Tipo de evento.
+    /** Tipo de evento registrado (ej. consulta, error, acción del sistema). */
     public String tipo;
 
-     //Detalle del error.
+    /** Descripción detallada del error en caso de que el evento sea de tipo error. */
     public String detalleError;
+
 
     /**
      * Constructor de la clase AppLog.

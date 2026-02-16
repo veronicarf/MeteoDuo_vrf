@@ -35,47 +35,88 @@ import java.util.function.BiConsumer;
  * - GEOAPI (provincias y municipios)
  * - Geocoder (coordenadas)
  * - Open-Meteo (predicción meteorológica)
+ *
+ *  @author Verónica Romero
  */
 public class ComparativaActivity extends AppCompatActivity {
 
 
-    //* AutoComplete para seleccionar provincias y municipios de ambos puntos
+// ==============================
+// SELECTORES (AUTOCOMPLETE)
+// ==============================
+
+    /** AutoCompleteTextView para seleccionar provincia y municipio del Punto A y del Punto B. */
     private AutoCompleteTextView spProvA, spMunA, spProvB, spMunB;
 
 
-    // Cola de peticiones Volley para llamadas HTTP
+// ==============================
+// RED (VOLLEY)
+// ==============================
+
+    /** Cola de peticiones Volley utilizada para realizar llamadas HTTP a la API. */
     private RequestQueue queue;
 
 
-   //Lista de nombres de provincias
+// ==============================
+// DATOS DE PROVINCIAS
+// ==============================
+
+    /** Lista con los nombres de provincias obtenidos desde la API. */
     private final List<String> provinciaNombres = new ArrayList<>();
 
-   // Mapa que relaciona nombre de provincia y  código CPRO
+    /** Mapa que relaciona el nombre de la provincia con su código CPRO devuelto por la API. */
     private final Map<String, String> provinciaNombreToCpro = new HashMap<>();
 
 
-   //Municipios del Punto A  y B
+// ==============================
+// DATOS DE MUNICIPIOS
+// ==============================
+
+    /** Lista de municipios disponibles para el Punto A (según provincia seleccionada). */
     private final List<String> municipiosA = new ArrayList<>();
+
+    /** Lista de municipios disponibles para el Punto B (según provincia seleccionada). */
     private final List<String> municipiosB = new ArrayList<>();
 
 
-   //dapter de provincias y municipios Punto A Y B
+// ==============================
+// ADAPTERS
+// ==============================
+
+    /** Adaptador para mostrar la lista de provincias en los AutoComplete. */
     private ArrayAdapter<String> adapterProv;
+
+    /** Adaptador para mostrar los municipios del Punto A. */
     private ArrayAdapter<String> adapterMunA;
+
+    /** Adaptador para mostrar los municipios del Punto B. */
     private ArrayAdapter<String> adapterMunB;
 
 
-    // URL base de GEOAPI  y Clave de acceso a GEOAPI
+// ==============================
+// CONFIGURACIÓN GEOAPI
+// ==============================
+
+    /** URL base del servicio GeoAPI utilizado para consultar provincias y municipios. */
     private static final String BASE = "https://apiv1.geoapi.es";
-    private static final String KEY = "";
-//1fc368b23d25818cdd878134ec20df90e9e67a7a38481c4e395d0a6d56f99abc
-   //Parámetros comunes para las peticiones
+
+    /** Clave de acceso a GeoAPI. Se mantiene fuera del código en producción por seguridad. */
+    private static final String KEY = "1fc368b23d25818cdd878134ec20df90e9e67a7a38481c4e395d0a6d56f99abc";
+
+    /** Parámetros comunes para todas las peticiones (formato, tamaño de página y clave). */
     private static final String COMMON_PARAMS = "FORMAT=json&PAGE_SIZE=1000&KEY=" + KEY;
 
 
-    // Última provincia seleccionada en Punto A y B
+// ==============================
+// ESTADO DE SELECCIÓN
+// ==============================
+
+    /** Última provincia seleccionada en el Punto A  */
     private String ultimaProvA = "";
+
+    /** Última provincia seleccionada en el Punto B  */
     private String ultimaProvB = "";
+
 
 
     /**

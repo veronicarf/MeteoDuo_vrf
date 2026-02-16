@@ -68,6 +68,15 @@
     <string name="mostrar_ocultar">Mostrar_Ocultar</string>
     <string name="unidad_temperatura">Unidad temperatura</string>
     <string name="ajustes">Ajustes</string>
+    <string name="volver">Volver</string>
+    <string name="dd_mm_yyyy_a_dd_mm_yyyy">dd/MM/yyyy a dd/MM/yyyy</string>
+    <string name="municipio_provincia_municipio_provincia">Municipio (Provincia) - Municipio (Provincia)</string>
+    <string name="resultados">RESULTADOS</string>
+    <string name="mensaje">Mensaje</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="temp_max">Temp Max</string>
+    <string name="temp_min">Temp Min</string>
+    <string name="precipitacion">Precipitación</string>
 
 
 </resources>

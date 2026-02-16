@@ -15,27 +15,48 @@ import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Activity encargada de mostrar el historial de consultas guardadas del usuario actual.
+ *
+ *  @author Verónica Romero
  */
 public class HistorialActivity extends AppCompatActivity {
 
-  //ListView donde se muestran las consultas guardadas.
+  // ==============================
+ // COMPONENTES DE INTERFAZ
+ // ==============================
+
+    /** ListView donde se muestran las consultas meteorológicas guardadas. */
     private ListView listHistorial;
 
-  //Botones
-   private Button btnVolver;
-   private Button btnEliminarHistorial;
+    /** Botón para volver a la pantalla anterior. */
+    private Button btnVolver;
 
-    //Lista con los objetos JSON completos del historial.
+    /** Botón que permite eliminar todo el historial almacenado. */
+    private Button btnEliminarHistorial;
+
+
+  // ==============================
+ // DATOS DEL HISTORIAL
+// ==============================
+
+    /** Lista que almacena los objetos JSON completos recuperados del historial. */
     private final List<JSONObject> itemsJson = new ArrayList<>();
 
-   //Lista de textos formateados que se muestran en el ListView.
+    /** Lista de textos formateados que se muestran visualmente en el ListView. */
     private final List<String> itemsTexto = new ArrayList<>();
 
-    // Adapter que enlaza los textos con el ListView.
+    /** Adaptador que enlaza la lista de textos con el ListView. */
     private ArrayAdapter<String> adapter;
 
-    //UID del usuario actual
+
+   // ==============================
+  // USUARIO ACTUAL
+ // ==============================
+
+    /** Identificador único (UID) del usuario autenticado en Firebase. */
     private String uid;
+
+
+
 
     /**
      * Método de inicialización de la Activity.

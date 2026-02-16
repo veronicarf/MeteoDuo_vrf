@@ -85,7 +85,6 @@
 
     <!-- ===================== -->
     <!-- SECCIÓN: Acciones     -->
-    <!-- (Botones principales) -->
     <!-- ===================== -->
     <Button
         android:id="@+id/btnConsultar"
@@ -114,9 +113,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ===================== -->
     <!-- Frase -->
-    <!-- ===================== -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"

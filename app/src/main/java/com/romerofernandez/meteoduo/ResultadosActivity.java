@@ -23,32 +23,66 @@ import java.util.Locale;
 
 /**
  * Activity encargada de mostrar la comparativa meteorológica entre dos puntos (A y B)
+ *
+ *  @author Verónica Romero
   */
 public class ResultadosActivity extends AppCompatActivity {
 
+// ==============================
+// CONFIGURACIÓN POR DEFECTO
+// ==============================
 
-    //Valores por defecto
+    /** Indica si se debe mostrar la información del viento  */
     private boolean mostrarViento = true;
+
+    /** Indica si se debe mostrar el estado del cielo . */
     private boolean mostrarCielo = true;
+
+    /** Indica si se debe mostrar la probabilidad de lluvia . */
     private boolean mostrarLluvia = true;
+
+    /** Unidad de temperatura seleccionada . */
     private String unidadTemp = "C";
 
-//Varible UI
 
+// ==============================
+// COMPONENTES DE INTERFAZ
+// ==============================
+
+    /** TextView que muestra los municipios seleccionados para la comparativa. */
     private TextView tvPuntos;
+
+    /** TextView que muestra el rango de fechas de la predicción. */
     private TextView tvRango;
+
+    /** Contenedor dinámico donde se agregan las tarjetas de los días comparados. */
     private LinearLayout contenedorDias;
+
+    /** Botón para guardar los ajustes seleccionados por el usuario. */
     private Button btnGuardar;
+
+    /** Botón para volver a la pantalla anterior. */
     private Button btnVolver;
+
+    /** ProgressBar que indica que se están cargando datos o aplicando ajustes. */
     private ProgressBar pbAjustes;
 
 
+// ==============================
+// USUARIO ACTUAL
+// ==============================
 
-  //UID del usuario autenticado
+    /** UID del usuario autenticado  */
     private String uid = "guest";
 
-  //Número de días a mostrar en la comparativa.
+
+// ==============================
+// CONSTANTES
+// ==============================
+
+    /** Número de días que se mostrarán en la comparativa meteorológica. */
     private static final int NUM_DIAS = 3;
+
 
     /**
      * Método de inicialización de la Activity.

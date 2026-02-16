@@ -20,24 +20,49 @@ import com.google.firebase.firestore.FirebaseFirestore;
  *
  * Muestra información básica del usuario (nombre y avatar) y permite navegar a:
  * Ajustes, Historial, Comparativa y App principal de administrador.
- * @Verónica Romero Fernández
+ *
+ * @author Verónica Romero
  */
 public class ActivityAdministrador extends AppCompatActivity {
 
-    // Variables UI
+    // ==============================
+   // VARIABLES DE INTERFAZ// ==============================
+
+    /** Imagen que muestra el avatar actual del usuario */
     private ImageView imgAvatar;
+
+    /** TextView que muestra el nombre del usuario autenticado.*/
     private TextView tvNombreUsuario;
 
+    /** Botón de menú lateral o desplegable.*/
     private ImageButton btnMenu;
+
+    /** Botón que permite consultar el clima actual.*/
     private Button btnConsultar;
+
+    /** Botón que redirige a la pantalla de historial.*/
     private Button btnHistorial;
+
+    /** Botón que redirige a información sobre la aplicación */
     private Button btnApp;
+
+    /** Botón para cerrar sesión o apagar la sesión actual. */
     private ImageButton btnApagar;
 
 
-    // Variables  Firebase
+
+    // ==============================
+   // VARIABLES DE FIREBASE
+  // ==============================
+
+    /** Instancia de FirebaseFirestore.*/
     private FirebaseFirestore db;
+
+    /** Instancia de FirebaseAuth.*/
     private FirebaseAuth auth;
+
+
+
 
 
     /**

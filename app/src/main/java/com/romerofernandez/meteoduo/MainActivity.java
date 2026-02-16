@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
  * MainActivity
  * Activity principal de arranque de la aplicación.
  *
- * @author Verónica
+ * @author Verónica Romero
  * */
 public class MainActivity extends AppCompatActivity {
 

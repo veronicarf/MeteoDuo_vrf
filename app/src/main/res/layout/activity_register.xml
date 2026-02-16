@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Fondo (opcional: si quieres el mismo) -->
+    <!-- Fondo de pantalla -->
     <ImageView
         android:id="@+id/bgRegister"
         android:layout_width="0dp"
@@ -17,6 +17,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Campo para introducir el email -->
 
     <EditText
         android:id="@+id/etEmailReg"
@@ -35,6 +37,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <!-- Campo para introducir la contraseña -->
+
     <EditText
         android:id="@+id/etPasswordReg"
         android:layout_width="0dp"
@@ -51,6 +56,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etEmailReg" />
+
+    <!-- Campo para repetir la contraseña -->
 
     <EditText
         android:id="@+id/etPasswordReg2"
@@ -69,6 +76,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPasswordReg" />
 
+
+    <!-- Botón para crear la cuenta -->
+
     <Button
         android:id="@+id/btnCrearCuenta"
         android:layout_width="0dp"
@@ -82,6 +92,8 @@
         app:layout_constraintTop_toBottomOf="@id/etPasswordReg2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Texto para volver a la pantalla de login -->
 
     <TextView
         android:id="@+id/tvVolverLogin"

@@ -4,9 +4,7 @@ import com.google.firebase.firestore.DocumentReference;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,14 +18,32 @@ import java.util.Map;
  */
 public class RegisterActivity extends AppCompatActivity {
 
-    // Campo de texto para introducir el correo electrónico y contraseña
+// ==============================
+// COMPONENTES DE INTERFAZ
+// ==============================
+
+    /** Campo de texto para introducir el correo electrónico del usuario. */
     private EditText etEmail;
+
+    /** Campo de texto para introducir la contraseña. */
     private EditText etPass1;
+
+    /** Campo de texto para confirmar la contraseña introducida. */
     private EditText etPass2;
 
-    // Instancia de FirebaseAuth para crear cuentas de usuario y guardarlos
+
+// ==============================
+// SERVICIOS FIREBASE
+// ==============================
+
+    /** Instancia de FirebaseAuth  */
     private FirebaseAuth auth;
+
+    /** Instancia de FirebaseFirestore */
     private FirebaseFirestore db;
+
+
+
 
     /**
      * Método de inicialización de la Activity.

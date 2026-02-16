@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,7 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
-    <!-- Cargando ajustes (overlay) -->
+
+    <!-- Barra de carga centrada -->
     <ProgressBar
         android:id="@+id/pbAjustes"
         style="?android:attr/progressBarStyleLarge"
@@ -18,9 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- ===================== -->
-    <!-- SECCIÓN: Fondo        -->
-    <!-- ===================== -->
+    <!-- Imagen  -->
     <ImageView
         android:id="@+id/bg"
         android:layout_width="0dp"
@@ -33,14 +34,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-    <!-- Título grande -->
+
+    <!-- Título  -->
     <TextView
         android:id="@+id/tvTituloResultados"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:gravity="center"
-        android:text="RESULTADOS"
+        android:text="@string/resultados"
         android:textColor="@color/boton"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -48,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Caja cabecera estilo "marco" -->
+    <!-- Tarjeta superior que muestra municipio y rango de fechas -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardCabecera"
         android:layout_width="0dp"
@@ -62,6 +64,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Contenedor interno de la cabecera -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,7 +72,7 @@
             android:padding="12dp"
             android:background="@drawable/fondo_resultados">
 
-
+            <!-- Texto con los municipios seleccionados -->
             <TextView
                 android:id="@+id/tvPuntos"
                 android:layout_width="match_parent"
@@ -77,11 +80,12 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center"
-                android:text="Municipio (Provincia) - Municipio (Provincia)"
+                android:text="@string/municipio_provincia_municipio_provincia"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <!-- Texto con el rango de fechas  -->
             <TextView
                 android:id="@+id/tvRango"
                 android:layout_width="match_parent"
@@ -89,7 +93,7 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center"
-                android:text="dd/MM/yyyy a dd/MM/yyyy"
+                android:text="@string/dd_mm_yyyy_a_dd_mm_yyyy"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -97,8 +101,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-
-    <!-- Scroll de resultados (va bajando) -->
+    <!-- Área desplazable donde se mostrarán  los días -->
     <ScrollView
         android:id="@+id/scrollResultados"
         android:layout_width="0dp"
@@ -109,7 +112,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Contenedor donde se irán añadiendo los días -->
+        <!-- Contenedor dinámico donde se añaden las tarjetas de cada día -->
         <LinearLayout
             android:id="@+id/contenedorDias"
             android:layout_width="match_parent"
@@ -119,7 +122,7 @@
 
     </ScrollView>
 
-    <!-- Botones  -->
+    <!-- Barra inferior con botones de acción -->
     <LinearLayout
         android:id="@+id/barraBotones"
         android:layout_width="0dp"
@@ -131,21 +134,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Botón  guardar  -->
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Guardar"/>
+            android:text="@string/guardar"/>
 
+        <!-- Espacio separador entre botones -->
         <Space
             android:layout_width="16dp"
             android:layout_height="1dp"/>
 
+        <!-- Botón  volver  -->
         <Button
             android:id="@+id/btnVolver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Volver"/>
+            android:text="@string/volver"/>
 
     </LinearLayout>
 

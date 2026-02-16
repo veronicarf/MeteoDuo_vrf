@@ -26,29 +26,65 @@ import java.util.Locale;
 /**
  * AppActivity
  * Actividad encargada de mostrar el historial de eventos de la aplicación.
+ *
+ *  @author Verónica Romero
  */
 public class AppActivity extends AppCompatActivity {
 
-    // Constantes
+    // ==============================
+   // CONSTANTES
+  // ==============================
 
+    /** Etiqueta utilizada para el registro de logs en Logcat.*/
     private static final String TAG = "AppActivity";
 
-    // Atributos de avatar
 
+     // ==============================
+    // ATRIBUTOS RELACIONADOS CON AVATAR
+   // ==============================
+
+    /** Nombre del avatar seleccionado */
     private String avatarSeleccionado = "avatar1";
+
+    /** Vista previa del avatar actual del usuario.*/
     private ImageView imgAvatarPreview;
 
-    // Variables UI
-    private RecyclerView rvApp;
-    private Button btnVolverApp, btnEliminarApp;
 
-    // Adapter y datos
+    // ==============================
+   // VARIABLES DE INTERFAZ
+  // ==============================
+
+    /** RecyclerView que muestra el listado de registros*/
+    private RecyclerView rvApp;
+
+    /** Botón para volver a la pantalla anterior.*/
+    private Button btnVolverApp;
+
+    /** Botón que permite eliminar los registros almacenados*/
+    private Button btnEliminarApp;
+
+
+   // ==============================
+  // ADAPTER Y DATOS
+ // ==============================
+
+    /** Adaptador encargado de enlazar los datos del modelo AppLog*/
     private AppLogAdapter adapter;
+
+    /** Lista que almacena los registros recuperados desde Firestore.*/
+
     private final List<AppLog> data = new ArrayList<>();
 
-    // Variable Firebase
+
+      // ==============================
+     // VARIABLES DE FIREBASE
+    // ==============================
+
+    /**Instancia de FirebaseFirestore.*/
 
     private FirebaseFirestore db;
+
+    /** ListenerRegistration que mantiene una suscripción en tiempo real */
     private ListenerRegistration registroListener;
 
 

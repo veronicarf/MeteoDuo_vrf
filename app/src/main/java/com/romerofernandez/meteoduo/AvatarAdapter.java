@@ -10,21 +10,31 @@ import java.util.List;
 
 /**
  * Adapter del RecyclerView encargado de mostrar una lista de avatares.
+ *
+ *  @author Verónica Romero
  */
 public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.VH> {
 
-//Lista de claves de los avatares
+    // ==============================
+   // DATOS DE AVATARES
+  // ==============================
+
+    /** Lista de claves que identifican los avatares disponibles. */
     private final List<String> avatarKeys;
 
-//Listener que gestiona el clic sobre un avatar
+    /** Listener que gestiona el clic sobre un avatar seleccionado. */
     private final OnAvatarClick listener;
 
-    /**
-     * Interfaz para gestionar el clic sobre un avatar.
-     */
+
+    // ==============================
+   // INTERFAZ DE SELECCIÓN
+  // ==============================
+
+    /** Interfaz que define la acción al seleccionar un avatar. */
     public interface OnAvatarClick {
-        void onClick(String avatarKey); // Devuelve la clave del avatar seleccionado
+        void onClick(String avatarKey);
     }
+
 
     /**
      * Constructor del adapter.
