@@ -1,5 +1,4 @@
 package com.romerofernandez.meteoduo;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.HashMap;
 import java.util.Map;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 /**
  * Activity encargada del registro de nuevos usuarios en la aplicación.
