@@ -1,14 +1,18 @@
 package com.romerofernandez.meteoduo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Filter;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
@@ -23,6 +27,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -189,7 +194,7 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
     /** Configura listeners de botones y eventos de selección de provincias. */
-    private void configurarEventosUI() {
+   private void configurarEventosUI() {
 
         Button btnVolver = findViewById(R.id.btnVolvercom);
         Button btnBuscar = findViewById(R.id.btnBuscar);
@@ -206,6 +211,7 @@ public class ComparativaActivity extends AppCompatActivity {
             String provSeleccionada = spProvB.getText().toString().trim();
             cargarMunicipiosSiProvinciaValida(provSeleccionada, false);
             spMunB.post(spMunB::showDropDown);
+
         });
 
         // Botón volver
@@ -215,8 +221,7 @@ public class ComparativaActivity extends AppCompatActivity {
         btnBuscar.setOnClickListener(v -> buscarComparativa());
     }
 
-
-    /**
+     /**
      * Devuelve el email del usuario actual para registrar errores.
      */
     private String emailActual() {
@@ -416,7 +421,7 @@ public class ComparativaActivity extends AppCompatActivity {
      * @param cpro código de la provincia
      * @param esPuntoA indica si los municipios corresponden al Punto A  y B
      */
-    private void cargarMunicipios(String cpro, boolean esPuntoA) {
+   private void cargarMunicipios(String cpro, boolean esPuntoA) {
 
         // Selecciona la lista de municipios destino según el punto A/B
         List<String> destino = esPuntoA ? municipiosA : municipiosB;
@@ -485,6 +490,8 @@ public class ComparativaActivity extends AppCompatActivity {
         // Añade la petición a la cola de Volley para su ejecución
         queue.add(req);
     }
+
+
 
 
     /**

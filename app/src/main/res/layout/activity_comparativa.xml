@@ -63,7 +63,7 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="casual"
                 android:text="@string/punto_a"
-                android:textColor="@color/text"
+                android:textColor="@color/boton"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -77,17 +77,21 @@
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="0dp"
+                    android:layout_width="5dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:text="@string/provincia"
+                    android:textColor="@color/black"
+
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteTextView"
+                    android:backgroundTint="@android:color/black"
                     android:layout_width="0dp"
+                    android:textColorHint="@color/black"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/autocomplete"
@@ -111,14 +115,17 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:text="@string/municipio"
+                    android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <AutoCompleteTextView
+                    android:backgroundTint="@android:color/black"
                     android:id="@+id/autoCompleteTextView3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColorHint="@color/black"
                     android:hint="@string/autocompletem"
                     android:inputType="text"
                     android:completionThreshold="1"
@@ -134,7 +141,7 @@
                 android:layout_marginTop="28dp"
                 android:fontFamily="casual"
                 android:text="@string/punto_b"
-                android:textColor="@color/text"
+                android:textColor="@color/boton"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -153,15 +160,18 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:text="@string/provincia"
+                    android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <AutoCompleteTextView
+                    android:backgroundTint="@android:color/black"
                     android:id="@+id/autoCompleteTextView2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/autocomplete"
+                    android:textColorHint="@color/black"
                     android:inputType="text"
                     android:dropDownHeight="200dp"
                     android:padding="8dp" />
@@ -182,15 +192,18 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:text="@string/municipio"
+                    android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <AutoCompleteTextView
+                    android:backgroundTint="@android:color/black"
                     android:id="@+id/autoCompleteTextView4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/autocompletem"
+                    android:textColorHint="@color/black"
                     android:inputType="text"
                     android:dropDownHeight="200dp"
                     android:padding="8dp" />
@@ -207,6 +220,7 @@
                 android:layout_height="44dp"
                 android:layout_marginTop="28dp"
                 android:backgroundTint="@color/boton"
+                android:textColor="@color/white"
                 android:text="@string/look_button" />
 
             <!-- BOTÓN VOLVER -->
@@ -216,6 +230,7 @@
                 android:layout_height="44dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="24dp"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/boton"
                 android:text="@string/back_button" />
 

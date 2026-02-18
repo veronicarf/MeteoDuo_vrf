@@ -4,6 +4,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootResultados"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,10 +37,14 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Título  -->
+
+    <!-- Tarjeta superior que muestra municipio y rango de fechas -->
+
     <TextView
         android:id="@+id/tvTituloResultados"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:fontFamily="casual"
         android:gravity="center"
         android:text="@string/resultados"
@@ -47,10 +52,10 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Tarjeta superior que muestra municipio y rango de fechas -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardCabecera"
         android:layout_width="0dp"
@@ -125,33 +130,38 @@
     <!-- Barra inferior con botones de acción -->
     <LinearLayout
         android:id="@+id/barraBotones"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_width="378dp"
+        android:layout_height="93dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <!-- Botón  guardar  -->
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/guardar"/>
+            android:backgroundTint="@color/boton"
+            android:text="@string/guardar"
+            android:textColor="@color/white" />
 
         <!-- Espacio separador entre botones -->
         <Space
             android:layout_width="16dp"
-            android:layout_height="1dp"/>
+            android:layout_height="1dp" />
 
         <!-- Botón  volver  -->
         <Button
             android:id="@+id/btnVolver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/volver"/>
+            android:backgroundTint="@color/boton"
+            android:text="@string/volver"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

@@ -20,22 +20,24 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Título -->
+
+    <!-- Marco central -->
     <TextView
         android:id="@+id/tvTituloHistorial"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="casual"
         android:gravity="center"
         android:text="@string/titulohistorial"
         android:textColor="@color/boton"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Marco central -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardHistorial"
         android:layout_width="0dp"
@@ -66,19 +68,20 @@
                 android:layout_weight="1"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="8dp"
-                android:scrollbars="none"/>
+                android:scrollbars="none" />
 
             <!-- Botón Volver -->
+
+            <!-- Botón Eliminar -->
+
             <Button
                 android:id="@+id/btnVolverHistorial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="@string/btonvolver"
-                android:backgroundTint="@color/boton"/>
-
-            <!-- Botón Eliminar -->
+                android:backgroundTint="@color/boton"
+                android:text="@string/btonvolver" />
 
             <Button
                 android:id="@+id/btnEliminarHistorial"
@@ -86,8 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="@string/btneliminar"
-                android:backgroundTint="@color/boton"/>
+                android:backgroundTint="@color/boton"
+                android:text="@string/btneliminar" />
 
 
         </LinearLayout>

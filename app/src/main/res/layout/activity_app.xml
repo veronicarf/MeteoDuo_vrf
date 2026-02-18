@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,23 +25,25 @@
     <!-- ============================== -->
     <!--TITULO-->
     <!-- ============================== -->
+
+    <!-- ============================== -->
+    <!--CABECERA TABLA->
+    <!- ============================== -->
     <TextView
         android:id="@+id/tvTituloapp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="@string/detalle_app"
         android:textColor="@color/boton"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- ============================== -->
-    <!--CABECERA TABLA->
-    <!- ============================== -->
     <LinearLayout
         android:id="@+id/headerTabla"
         android:layout_width="0dp"
@@ -93,23 +96,23 @@
     <!-- ============================== -->
     <LinearLayout
         android:id="@+id/llBotones"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="390dp"
+        android:layout_height="169dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btnVolverApp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/boton"
-            android:text="@string/btonvolver"/>
+            android:text="@string/btonvolver" />
 
         <Button
             android:id="@+id/btnEliminarApp"
@@ -117,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/boton"
-            android:text="@string/btneliminar"/>
+            android:text="@string/btneliminar" />
     </LinearLayout>
 
     <!-- ============================== -->

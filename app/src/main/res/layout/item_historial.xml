@@ -8,4 +8,8 @@
     android:background="@drawable/fondo_resultados"
     android:textSize="16sp"
     android:textColor="@color/text"
-    android:textStyle="bold" />
+    android:textStyle="bold"
+    android:singleLine="false"
+    android:maxLines="2"
+    android:ellipsize="end"
+    />
