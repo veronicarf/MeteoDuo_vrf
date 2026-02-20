@@ -1,18 +1,14 @@
 package com.romerofernandez.meteoduo;
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Filter;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
@@ -194,7 +190,7 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
     /** Configura listeners de botones y eventos de selección de provincias. */
-   private void configurarEventosUI() {
+    private void configurarEventosUI() {
 
         Button btnVolver = findViewById(R.id.btnVolvercom);
         Button btnBuscar = findViewById(R.id.btnBuscar);
@@ -221,7 +217,7 @@ public class ComparativaActivity extends AppCompatActivity {
         btnBuscar.setOnClickListener(v -> buscarComparativa());
     }
 
-     /**
+    /**
      * Devuelve el email del usuario actual para registrar errores.
      */
     private String emailActual() {
@@ -236,29 +232,36 @@ public class ComparativaActivity extends AppCompatActivity {
      * @param actv AutoCompleteTextView al que se le aplica el comportamiento
      */
     private void autoShowDropdown(AutoCompleteTextView actv) {
-
-        // Al ganar foco muestra el desplegable
+        // No mostrar nada el autocomplete
         actv.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) actv.post(actv::showDropDown);
+            if (!hasFocus) actv.dismissDropDown();
         });
 
-        // Al hacer click muestra el desplegable
-        actv.setOnClickListener(v -> actv.showDropDown());
+        actv.setOnClickListener(v -> {
+            // No mostrar si no hay texto suficiente
+            if (actv.getText() != null && actv.getText().length() >= actv.getThreshold()) {
+                actv.showDropDown();
+            }
+        });
 
-        // Mientras se escribe mantiene abierto el desplegable
+        // Mostrar solo al escribir
         actv.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (actv.hasFocus() && s != null && s.length() > 0) {
-                    actv.post(actv::showDropDown);
+                if (s != null && s.length() >= actv.getThreshold()) {
+                    actv.showDropDown();
+                } else {
+                    actv.dismissDropDown();
                 }
             }
-
             @Override public void afterTextChanged(Editable s) {}
         });
+
+        actv.setThreshold(1); // Empieza a sugerir al escribir la 1ª letra
     }
+
+
 
     /**
      * Vincula un AutoCompleteTextView de provincias con su correspondiente
@@ -421,54 +424,64 @@ public class ComparativaActivity extends AppCompatActivity {
      * @param cpro código de la provincia
      * @param esPuntoA indica si los municipios corresponden al Punto A  y B
      */
-   private void cargarMunicipios(String cpro, boolean esPuntoA) {
-
-        // Selecciona la lista de municipios destino según el punto A/B
+    private void cargarMunicipios(String cpro, boolean esPuntoA) {
+        //Escoge la lista destino dependiendo si estamos cargando para el Punto A o el Punto B
         List<String> destino = esPuntoA ? municipiosA : municipiosB;
 
-        // Selecciona el adapter correspondiente A/B
-        ArrayAdapter<String> adapter = esPuntoA ? adapterMunA : adapterMunB;
+        //AutoCompleteTextView que se va a actualizar (Municipios A o B)
+        AutoCompleteTextView actvMun = esPuntoA ? spMunA : spMunB;
 
-        // Construye la URL para obtener municipios filtrados por provincia
+        // Construye la URL para consultar los municipios de una provincia concreta en la API de GeoAPI
         String url = BASE + "/municipios/?" + COMMON_PARAMS + "&CPRO=" + cpro;
 
-        // Crea la petición HTTP GET
+        // Crea una petición HTTP GET con Volley para obtener los datos en formato JSON
         JsonObjectRequest req = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null,
                 response -> {
                     try {
-                        // Obtiene el array de municipios del JSON de respuesta
+                        // Extrae el array "data" del JSON que devuelve la API
                         JSONArray data = response.getJSONArray("data");
 
-                        // Limpia los datos anteriores
+                        // Limpia la lista actual de municipios
                         destino.clear();
-                        adapter.clear();
 
-                        // Recorre todos los municipios devueltos por la API
+                        // Recorre todos los municipios devueltos por la API, obteniendo el nombre
                         for (int i = 0; i < data.length(); i++) {
                             String nombre = data.getJSONObject(i)
-                                    .optString("DMUN50", "")
-                                    .trim();
+                                    .optString("DMUN50", "")  // obtiene el nombre o cadena vacía si no existe
+                                    .trim();                  // elimina espacios al inicio y final
 
-                            // Añade solo nombres válidos formateados
+                            // Si el nombre no está vacío, lo formatea con la primera letra en mayúscula
                             if (!nombre.isEmpty()) {
                                 destino.add(Mayuscula(nombre));
                             }
                         }
+                        //Ordena la lista final de municipios alfabéticamente
+                        Collections.sort(destino, String::compareToIgnoreCase);
 
-                        // Añade los municipios al adapter
-                        adapter.addAll(destino);
+                        // Crea un nuevo adaptador estándar para mostrar el listado
+                        ArrayAdapter<String> nuevoAdapter = new ArrayAdapter<>(
+                                this,
+                                android.R.layout.simple_dropdown_item_1line,
+                                destino
+                        );
+                        // Asocia el nuevo adaptador al AutoCompleteTextView correspondiente
+                        actvMun.setAdapter(nuevoAdapter);
 
-                        // Refresca el AutoCompleteTextView
-                        adapter.notifyDataSetChanged();
+                        // Limpia el campo de texto del municipio
+                        actvMun.setText("");
 
+                        //Ajusta el umbral a 0 para que muestre sugerencias incluso si el campo está vacío
+                        actvMun.setThreshold(0);
+
+                        //  Muestra el desplegable con los municipios recién cargados
+                        actvMun.postDelayed(() -> actvMun.showDropDown(), 100);
                     } catch (Exception e) {
-                        // Error al procesar el JSON de municipios
-                        Toast.makeText(this, "Error parseando municipios", Toast.LENGTH_LONG).show();
 
-                        // Registra el error indicando la provincia afectada
+                        // Si ocurre un error al interpretar el JSON, se muestra un aviso y se registra el error
+                        Toast.makeText(this, "Error parseando municipios", Toast.LENGTH_LONG).show();
                         RegistroConexiones.error(
                                 emailActual(),
                                 "GEOAPI",
@@ -476,9 +489,9 @@ public class ComparativaActivity extends AppCompatActivity {
                         );
                     }
                 },
-                error -> { // Error de red
+                error -> {
+                    //  Si la solicitud falla (sin conexión o error del servidor)
                     Toast.makeText(this, "Error de red al cargar municipios", Toast.LENGTH_LONG).show();
-
                     RegistroConexiones.error(
                             emailActual(),
                             "GEOAPI",
@@ -486,11 +499,9 @@ public class ComparativaActivity extends AppCompatActivity {
                     );
                 }
         );
-
-        // Añade la petición a la cola de Volley para su ejecución
+        // Añade la petición a la cola de ejecución de Volley para que se envíe al servidor
         queue.add(req);
     }
-
 
 
 
@@ -810,3 +821,4 @@ public class ComparativaActivity extends AppCompatActivity {
     }
 
 }
+
