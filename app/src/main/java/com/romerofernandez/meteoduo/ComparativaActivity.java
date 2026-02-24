@@ -261,8 +261,6 @@ public class ComparativaActivity extends AppCompatActivity {
         actv.setThreshold(1); // Empieza a sugerir al escribir la 1ª letra
     }
 
-
-
     /**
      * Vincula un AutoCompleteTextView de provincias con su correspondiente
      *
