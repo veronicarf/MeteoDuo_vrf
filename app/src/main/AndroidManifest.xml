@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <!-- PERMISO  PARA GEOAPI / VOLLEY -->
+    <!-- PERMISO  PARA OPENMETEO / VOLLEY -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
