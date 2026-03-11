@@ -173,33 +173,6 @@ public class ActivityAdministrador extends AppCompatActivity {
     }
 
 
-    /**
-     * Método para pintar el nombre del usuario en la interfaz,
-     *
-     * @param nombre nombre a mostrar (puede ser null o vacío)
-     */
-    private void pintarNombre(@Nullable String nombre) {
-        if (tvNombreUsuario == null) return;
-
-        if (nombre != null && !nombre.trim().isEmpty()) {
-            tvNombreUsuario.setText(nombre.trim());
-        }
-    }
-
-    /**
-     * Método para pintar  el avatar del usuario en la interfaz, si es válido.
-     *
-     * @param avatar nombre del drawable
-     */
-    private void pintarAvatar(@Nullable String avatar) {
-        if (imgAvatar == null) return;
-
-        if (avatar != null && !avatar.trim().isEmpty()) {
-            imgAvatar.setImageResource(drawableFromName(avatar.trim()));
-        } else {
-            imgAvatar.setImageResource(R.drawable.avatar_default);
-        }
-    }
 
     /**
      * Método con el que se obtiene el id del recurso drawable a partir de su nombre.
@@ -227,8 +200,7 @@ public class ActivityAdministrador extends AppCompatActivity {
 
 
             // Salimos del método para evitar NullPointerException
-            return;
-        }
+            return;        }
 
         // Obtiene el UID
         String uid = user.getUid();
